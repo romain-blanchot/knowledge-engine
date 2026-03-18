@@ -7,10 +7,289 @@ datasource db {
   provider = "postgresql"
 }
 
-model Test {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now()) @map("created_at")
+enum ProjectStatus {
+  ACTIVE
+  ARCHIVED
+  DRAFT
+  COMPLETED
+}
 
-  @@map("test")
+enum DocumentCategory {
+  BUSINESS_CONTEXT
+  COMPANY_KNOWLEDGE
+  CAHIER_DES_CHARGES
+  SFD
+  API_DOCUMENTATION
+  TECHNICAL_NOTES
+  ARCHITECTURE_DECISIONS
+  OPEN_QUESTIONS
+}
+
+enum DocumentStatus {
+  INDEXED
+  PENDING
+  NEEDS_REVIEW
+  DRAFT
+}
+
+enum HttpMethod {
+  GET
+  POST
+  PUT
+  PATCH
+  DELETE
+}
+
+enum DecisionStatus {
+  APPROVED
+  PENDING
+  REJECTED
+  SUPERSEDED
+}
+
+enum QuestionPriority {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum QuestionStatus {
+  OPEN
+  ANSWERED
+  IN_PROGRESS
+  BLOCKED
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+}
+
+enum ExplorationCategory {
+  BUSINESS
+  FUNCTIONAL
+  BACKEND
+  FRONTEND
+  DATA
+  SECURITY
+  TESTING
+}
+
+enum IntegrationStatus {
+  CONNECTED
+  PENDING
+  AVAILABLE
+  DISABLED
+}
+
+model Project {
+  id              String        @id @default(cuid())
+  name            String
+  client          String
+  description     String
+  status          ProjectStatus @default(ACTIVE)
+  industry        String
+  completionScore Int           @default(0) @map("completion_score")
+  lastActivity    DateTime      @default(now()) @map("last_activity")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  documents     Document[]
+  conversations Conversation[]
+  apiEndpoints  ApiEndpoint[]
+  analyses      ImpactAnalysis[]
+  decisions     Decision[]
+  explorations  ExplorationPath[]
+  activities    Activity[]
+
+  @@map("projects")
+}
+
+model Document {
+  id                 String           @id @default(cuid())
+  title              String
+  category           DocumentCategory
+  status             DocumentStatus   @default(DRAFT)
+  summary            String?
+  content            String?
+  author             String
+  tags               String[]
+  ragIndexed         Boolean          @default(false) @map("rag_indexed")
+  ringUsed           Boolean          @default(false) @map("ring_used")
+  needsClarification Boolean          @default(false) @map("needs_clarification")
+  sectionsCount      Int              @default(0) @map("sections_count")
+  projectId          String           @map("project_id")
+  createdAt          DateTime         @default(now()) @map("created_at")
+  updatedAt          DateTime         @updatedAt @map("updated_at")
+
+  project  Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  sections DocumentSection[]
+
+  @@map("documents")
+}
+
+model DocumentSection {
+  id          String  @id @default(cuid())
+  title       String
+  content     String
+  order       Int
+  highlighted Boolean @default(false)
+  documentId  String  @map("document_id")
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@map("document_sections")
+}
+
+model Conversation {
+  id        String   @id @default(cuid())
+  title     String
+  projectId String   @map("project_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  project  Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  messages Message[]
+
+  @@map("conversations")
+}
+
+model Message {
+  id               String      @id @default(cuid())
+  role             MessageRole
+  content          String
+  summary          String?
+  backendImpacts   String[]    @map("backend_impacts")
+  frontendImpacts  String[]    @map("frontend_impacts")
+  documentsUsed    String[]    @map("documents_used")
+  apisUsed         String[]    @map("apis_used")
+  openQuestions    String[]    @map("open_questions")
+  risks            String[]
+  suggestedActions String[]    @map("suggested_actions")
+  confidenceScore  Int?        @map("confidence_score")
+  conversationId   String      @map("conversation_id")
+  createdAt        DateTime    @default(now()) @map("created_at")
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}
+
+model ApiEndpoint {
+  id                String     @id @default(cuid())
+  method            HttpMethod
+  route             String
+  service           String
+  description       String
+  authRequired      Boolean    @default(true) @map("auth_required")
+  requestPayload    Json?      @map("request_payload")
+  responsePayload   Json?      @map("response_payload")
+  errors            Json?
+  businessTags      String[]   @map("business_tags")
+  relatedComponents String[]   @map("related_components")
+  relatedDocuments  String[]   @map("related_documents")
+  businessRules     String[]   @map("business_rules")
+  projectId         String     @map("project_id")
+  createdAt         DateTime   @default(now()) @map("created_at")
+  updatedAt         DateTime   @updatedAt @map("updated_at")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("api_endpoints")
+}
+
+model ImpactAnalysis {
+  id                 String   @id @default(cuid())
+  title              String
+  feature            String
+  complexityScore    Int      @default(0) @map("complexity_score")
+  confidenceScore    Int      @default(0) @map("confidence_score")
+  functionalImpact   Json?    @map("functional_impact")
+  backendImpact      Json?    @map("backend_impact")
+  frontendImpact     Json?    @map("frontend_impact")
+  dataImpact         Json?    @map("data_impact")
+  securityImpact     Json?    @map("security_impact")
+  testingImpact      Json?    @map("testing_impact")
+  risks              Json?
+  recommendations    Json?
+  sourceDocs         String[] @map("source_docs")
+  impactedEndpoints  String[] @map("impacted_endpoints")
+  impactedComponents String[] @map("impacted_components")
+  projectId          String   @map("project_id")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("impact_analyses")
+}
+
+model Decision {
+  id            String         @id @default(cuid())
+  title         String
+  context       String
+  justification String
+  impact        String
+  author        String
+  status        DecisionStatus @default(PENDING)
+  relatedDocs   String[]       @map("related_docs")
+  relatedApis   String[]       @map("related_apis")
+  projectId     String         @map("project_id")
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("decisions")
+}
+
+model ExplorationPath {
+  id        String              @id @default(cuid())
+  category  ExplorationCategory
+  projectId String              @map("project_id")
+  createdAt DateTime            @default(now()) @map("created_at")
+
+  project   Project               @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  questions ExplorationQuestion[]
+
+  @@map("exploration_paths")
+}
+
+model ExplorationQuestion {
+  id            String           @id @default(cuid())
+  question      String
+  priority      QuestionPriority @default(MEDIUM)
+  status        QuestionStatus   @default(OPEN)
+  source        String?
+  relatedDocs   String[]         @map("related_docs")
+  relatedApis   String[]         @map("related_apis")
+  explorationId String           @map("exploration_id")
+
+  exploration ExplorationPath @relation(fields: [explorationId], references: [id], onDelete: Cascade)
+
+  @@map("exploration_questions")
+}
+
+model Activity {
+  id          String   @id @default(cuid())
+  type        String
+  description String
+  metadata    Json?
+  projectId   String   @map("project_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("activities")
+}
+
+model Integration {
+  id     String            @id @default(cuid())
+  name   String
+  type   String
+  status IntegrationStatus @default(AVAILABLE)
+  config Json?
+
+  @@map("integrations")
 }

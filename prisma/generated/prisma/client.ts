@@ -31,8 +31,8 @@ export * from "./enums"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Tests
- * const tests = await prisma.test.findMany()
+ * // Fetch zero or more Projects
+ * const projects = await prisma.project.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -42,7 +42,62 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
- * Model Test
+ * Model Project
  * 
  */
-export type Test = Prisma.TestModel
+export type Project = Prisma.ProjectModel
+/**
+ * Model Document
+ * 
+ */
+export type Document = Prisma.DocumentModel
+/**
+ * Model DocumentSection
+ * 
+ */
+export type DocumentSection = Prisma.DocumentSectionModel
+/**
+ * Model Conversation
+ * 
+ */
+export type Conversation = Prisma.ConversationModel
+/**
+ * Model Message
+ * 
+ */
+export type Message = Prisma.MessageModel
+/**
+ * Model ApiEndpoint
+ * 
+ */
+export type ApiEndpoint = Prisma.ApiEndpointModel
+/**
+ * Model ImpactAnalysis
+ * 
+ */
+export type ImpactAnalysis = Prisma.ImpactAnalysisModel
+/**
+ * Model Decision
+ * 
+ */
+export type Decision = Prisma.DecisionModel
+/**
+ * Model ExplorationPath
+ * 
+ */
+export type ExplorationPath = Prisma.ExplorationPathModel
+/**
+ * Model ExplorationQuestion
+ * 
+ */
+export type ExplorationQuestion = Prisma.ExplorationQuestionModel
+/**
+ * Model Activity
+ * 
+ */
+export type Activity = Prisma.ActivityModel
+/**
+ * Model Integration
+ * 
+ */
+export type Integration = Prisma.IntegrationModel

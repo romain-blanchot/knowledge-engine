@@ -9,7 +9,107 @@
 * 🟢 You can import this file directly.
 */
 
+export const ProjectStatus = {
+  ACTIVE: 'ACTIVE',
+  ARCHIVED: 'ARCHIVED',
+  DRAFT: 'DRAFT',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const DocumentCategory = {
+  BUSINESS_CONTEXT: 'BUSINESS_CONTEXT',
+  COMPANY_KNOWLEDGE: 'COMPANY_KNOWLEDGE',
+  CAHIER_DES_CHARGES: 'CAHIER_DES_CHARGES',
+  SFD: 'SFD',
+  API_DOCUMENTATION: 'API_DOCUMENTATION',
+  TECHNICAL_NOTES: 'TECHNICAL_NOTES',
+  ARCHITECTURE_DECISIONS: 'ARCHITECTURE_DECISIONS',
+  OPEN_QUESTIONS: 'OPEN_QUESTIONS'
+} as const
+
+export type DocumentCategory = (typeof DocumentCategory)[keyof typeof DocumentCategory]
+
+
+export const DocumentStatus = {
+  INDEXED: 'INDEXED',
+  PENDING: 'PENDING',
+  NEEDS_REVIEW: 'NEEDS_REVIEW',
+  DRAFT: 'DRAFT'
+} as const
+
+export type DocumentStatus = (typeof DocumentStatus)[keyof typeof DocumentStatus]
+
+
+export const HttpMethod = {
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  PATCH: 'PATCH',
+  DELETE: 'DELETE'
+} as const
+
+export type HttpMethod = (typeof HttpMethod)[keyof typeof HttpMethod]
+
+
+export const DecisionStatus = {
+  APPROVED: 'APPROVED',
+  PENDING: 'PENDING',
+  REJECTED: 'REJECTED',
+  SUPERSEDED: 'SUPERSEDED'
+} as const
+
+export type DecisionStatus = (typeof DecisionStatus)[keyof typeof DecisionStatus]
+
+
+export const QuestionPriority = {
+  CRITICAL: 'CRITICAL',
+  HIGH: 'HIGH',
+  MEDIUM: 'MEDIUM',
+  LOW: 'LOW'
+} as const
+
+export type QuestionPriority = (typeof QuestionPriority)[keyof typeof QuestionPriority]
+
+
+export const QuestionStatus = {
+  OPEN: 'OPEN',
+  ANSWERED: 'ANSWERED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  BLOCKED: 'BLOCKED'
+} as const
+
+export type QuestionStatus = (typeof QuestionStatus)[keyof typeof QuestionStatus]
+
+
+export const MessageRole = {
+  USER: 'USER',
+  ASSISTANT: 'ASSISTANT'
+} as const
+
+export type MessageRole = (typeof MessageRole)[keyof typeof MessageRole]
+
+
+export const ExplorationCategory = {
+  BUSINESS: 'BUSINESS',
+  FUNCTIONAL: 'FUNCTIONAL',
+  BACKEND: 'BACKEND',
+  FRONTEND: 'FRONTEND',
+  DATA: 'DATA',
+  SECURITY: 'SECURITY',
+  TESTING: 'TESTING'
+} as const
+
+export type ExplorationCategory = (typeof ExplorationCategory)[keyof typeof ExplorationCategory]
+
+
+export const IntegrationStatus = {
+  CONNECTED: 'CONNECTED',
+  PENDING: 'PENDING',
+  AVAILABLE: 'AVAILABLE',
+  DISABLED: 'DISABLED'
+} as const
+
+export type IntegrationStatus = (typeof IntegrationStatus)[keyof typeof IntegrationStatus]

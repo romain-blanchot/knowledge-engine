@@ -8,5 +8,16 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Test'
+export type * from './models/Project'
+export type * from './models/Document'
+export type * from './models/DocumentSection'
+export type * from './models/Conversation'
+export type * from './models/Message'
+export type * from './models/ApiEndpoint'
+export type * from './models/ImpactAnalysis'
+export type * from './models/Decision'
+export type * from './models/ExplorationPath'
+export type * from './models/ExplorationQuestion'
+export type * from './models/Activity'
+export type * from './models/Integration'
 export type * from './commonInputTypes'

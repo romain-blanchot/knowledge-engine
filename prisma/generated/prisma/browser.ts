@@ -18,7 +18,62 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
- * Model Test
+ * Model Project
  * 
  */
-export type Test = Prisma.TestModel
+export type Project = Prisma.ProjectModel
+/**
+ * Model Document
+ * 
+ */
+export type Document = Prisma.DocumentModel
+/**
+ * Model DocumentSection
+ * 
+ */
+export type DocumentSection = Prisma.DocumentSectionModel
+/**
+ * Model Conversation
+ * 
+ */
+export type Conversation = Prisma.ConversationModel
+/**
+ * Model Message
+ * 
+ */
+export type Message = Prisma.MessageModel
+/**
+ * Model ApiEndpoint
+ * 
+ */
+export type ApiEndpoint = Prisma.ApiEndpointModel
+/**
+ * Model ImpactAnalysis
+ * 
+ */
+export type ImpactAnalysis = Prisma.ImpactAnalysisModel
+/**
+ * Model Decision
+ * 
+ */
+export type Decision = Prisma.DecisionModel
+/**
+ * Model ExplorationPath
+ * 
+ */
+export type ExplorationPath = Prisma.ExplorationPathModel
+/**
+ * Model ExplorationQuestion
+ * 
+ */
+export type ExplorationQuestion = Prisma.ExplorationQuestionModel
+/**
+ * Model Activity
+ * 
+ */
+export type Activity = Prisma.ActivityModel
+/**
+ * Model Integration
+ * 
+ */
+export type Integration = Prisma.IntegrationModel

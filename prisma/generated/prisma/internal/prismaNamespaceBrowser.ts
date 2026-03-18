@@ -51,7 +51,18 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Test: 'Test'
+  Project: 'Project',
+  Document: 'Document',
+  DocumentSection: 'DocumentSection',
+  Conversation: 'Conversation',
+  Message: 'Message',
+  ApiEndpoint: 'ApiEndpoint',
+  ImpactAnalysis: 'ImpactAnalysis',
+  Decision: 'Decision',
+  ExplorationPath: 'ExplorationPath',
+  ExplorationQuestion: 'ExplorationQuestion',
+  Activity: 'Activity',
+  Integration: 'Integration'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -70,13 +81,196 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const TestScalarFieldEnum = {
+export const ProjectScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  client: 'client',
+  description: 'description',
+  status: 'status',
+  industry: 'industry',
+  completionScore: 'completionScore',
+  lastActivity: 'lastActivity',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const DocumentScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  category: 'category',
+  status: 'status',
+  summary: 'summary',
+  content: 'content',
+  author: 'author',
+  tags: 'tags',
+  ragIndexed: 'ragIndexed',
+  ringUsed: 'ringUsed',
+  needsClarification: 'needsClarification',
+  sectionsCount: 'sectionsCount',
+  projectId: 'projectId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+
+
+export const DocumentSectionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  order: 'order',
+  highlighted: 'highlighted',
+  documentId: 'documentId'
+} as const
+
+export type DocumentSectionScalarFieldEnum = (typeof DocumentSectionScalarFieldEnum)[keyof typeof DocumentSectionScalarFieldEnum]
+
+
+export const ConversationScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  projectId: 'projectId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
+
+
+export const MessageScalarFieldEnum = {
+  id: 'id',
+  role: 'role',
+  content: 'content',
+  summary: 'summary',
+  backendImpacts: 'backendImpacts',
+  frontendImpacts: 'frontendImpacts',
+  documentsUsed: 'documentsUsed',
+  apisUsed: 'apisUsed',
+  openQuestions: 'openQuestions',
+  risks: 'risks',
+  suggestedActions: 'suggestedActions',
+  confidenceScore: 'confidenceScore',
+  conversationId: 'conversationId',
   createdAt: 'createdAt'
 } as const
 
-export type TestScalarFieldEnum = (typeof TestScalarFieldEnum)[keyof typeof TestScalarFieldEnum]
+export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+export const ApiEndpointScalarFieldEnum = {
+  id: 'id',
+  method: 'method',
+  route: 'route',
+  service: 'service',
+  description: 'description',
+  authRequired: 'authRequired',
+  requestPayload: 'requestPayload',
+  responsePayload: 'responsePayload',
+  errors: 'errors',
+  businessTags: 'businessTags',
+  relatedComponents: 'relatedComponents',
+  relatedDocuments: 'relatedDocuments',
+  businessRules: 'businessRules',
+  projectId: 'projectId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ApiEndpointScalarFieldEnum = (typeof ApiEndpointScalarFieldEnum)[keyof typeof ApiEndpointScalarFieldEnum]
+
+
+export const ImpactAnalysisScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  feature: 'feature',
+  complexityScore: 'complexityScore',
+  confidenceScore: 'confidenceScore',
+  functionalImpact: 'functionalImpact',
+  backendImpact: 'backendImpact',
+  frontendImpact: 'frontendImpact',
+  dataImpact: 'dataImpact',
+  securityImpact: 'securityImpact',
+  testingImpact: 'testingImpact',
+  risks: 'risks',
+  recommendations: 'recommendations',
+  sourceDocs: 'sourceDocs',
+  impactedEndpoints: 'impactedEndpoints',
+  impactedComponents: 'impactedComponents',
+  projectId: 'projectId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ImpactAnalysisScalarFieldEnum = (typeof ImpactAnalysisScalarFieldEnum)[keyof typeof ImpactAnalysisScalarFieldEnum]
+
+
+export const DecisionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  context: 'context',
+  justification: 'justification',
+  impact: 'impact',
+  author: 'author',
+  status: 'status',
+  relatedDocs: 'relatedDocs',
+  relatedApis: 'relatedApis',
+  projectId: 'projectId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DecisionScalarFieldEnum = (typeof DecisionScalarFieldEnum)[keyof typeof DecisionScalarFieldEnum]
+
+
+export const ExplorationPathScalarFieldEnum = {
+  id: 'id',
+  category: 'category',
+  projectId: 'projectId',
+  createdAt: 'createdAt'
+} as const
+
+export type ExplorationPathScalarFieldEnum = (typeof ExplorationPathScalarFieldEnum)[keyof typeof ExplorationPathScalarFieldEnum]
+
+
+export const ExplorationQuestionScalarFieldEnum = {
+  id: 'id',
+  question: 'question',
+  priority: 'priority',
+  status: 'status',
+  source: 'source',
+  relatedDocs: 'relatedDocs',
+  relatedApis: 'relatedApis',
+  explorationId: 'explorationId'
+} as const
+
+export type ExplorationQuestionScalarFieldEnum = (typeof ExplorationQuestionScalarFieldEnum)[keyof typeof ExplorationQuestionScalarFieldEnum]
+
+
+export const ActivityScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  description: 'description',
+  metadata: 'metadata',
+  projectId: 'projectId',
+  createdAt: 'createdAt'
+} as const
+
+export type ActivityScalarFieldEnum = (typeof ActivityScalarFieldEnum)[keyof typeof ActivityScalarFieldEnum]
+
+
+export const IntegrationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  type: 'type',
+  status: 'status',
+  config: 'config'
+} as const
+
+export type IntegrationScalarFieldEnum = (typeof IntegrationScalarFieldEnum)[keyof typeof IntegrationScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -87,10 +281,35 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
