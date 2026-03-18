@@ -57,7 +57,6 @@ export default async function DocumentDetailPage({ params }: PageProps) {
       author: document.author,
       tags: document.tags,
       ragIndexed: document.ragIndexed,
-      ringUsed: document.ringUsed,
       needsClarification: document.needsClarification,
       sectionsCount: document.sectionsCount,
       sections: document.sections.map((s: (typeof document.sections)[number]) => ({

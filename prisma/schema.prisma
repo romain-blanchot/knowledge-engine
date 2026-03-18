@@ -14,15 +14,22 @@ enum ProjectStatus {
   COMPLETED
 }
 
+enum ProjectPhase {
+  PREPARATION
+  CADRAGE
+  PROPOSITION
+  MISSION
+}
+
 enum DocumentCategory {
   BUSINESS_CONTEXT
   COMPANY_KNOWLEDGE
   CAHIER_DES_CHARGES
   SFD
-  API_DOCUMENTATION
   TECHNICAL_NOTES
   ARCHITECTURE_DECISIONS
   OPEN_QUESTIONS
+  INDUSTRY_ANALYSIS
 }
 
 enum DocumentStatus {
@@ -32,19 +39,17 @@ enum DocumentStatus {
   DRAFT
 }
 
-enum HttpMethod {
-  GET
-  POST
-  PUT
-  PATCH
-  DELETE
-}
-
 enum DecisionStatus {
   APPROVED
   PENDING
   REJECTED
   SUPERSEDED
+}
+
+enum DecisionInputType {
+  TEXT
+  AUDIO
+  FILE
 }
 
 enum QuestionPriority {
@@ -56,9 +61,9 @@ enum QuestionPriority {
 
 enum QuestionStatus {
   OPEN
-  ANSWERED
+  ACCEPTED
+  REJECTED
   IN_PROGRESS
-  BLOCKED
 }
 
 enum MessageRole {
@@ -67,13 +72,11 @@ enum MessageRole {
 }
 
 enum ExplorationCategory {
-  BUSINESS
-  FUNCTIONAL
-  BACKEND
-  FRONTEND
-  DATA
-  SECURITY
-  TESTING
+  CONTEXTE_ENTREPRISE
+  ENJEUX_SECTORIELS
+  QUESTIONS_RDV
+  HYPOTHESES
+  PISTES_CADRAGE
 }
 
 enum IntegrationStatus {
@@ -88,22 +91,36 @@ model Project {
   name            String
   client          String
   description     String
+  summary         String?
   status          ProjectStatus @default(ACTIVE)
+  phase           ProjectPhase  @default(PREPARATION)
   industry        String
-  completionScore Int           @default(0) @map("completion_score")
   lastActivity    DateTime      @default(now()) @map("last_activity")
   createdAt       DateTime      @default(now()) @map("created_at")
   updatedAt       DateTime      @updatedAt @map("updated_at")
 
   documents     Document[]
   conversations Conversation[]
-  apiEndpoints  ApiEndpoint[]
-  analyses      ImpactAnalysis[]
   decisions     Decision[]
   explorations  ExplorationPath[]
   activities    Activity[]
+  issues        ProjectIssue[]
 
   @@map("projects")
+}
+
+model ProjectIssue {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  severity    String   @default("medium")
+  resolved    Boolean  @default(false)
+  projectId   String   @map("project_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("project_issues")
 }
 
 model Document {
@@ -116,7 +133,6 @@ model Document {
   author             String
   tags               String[]
   ragIndexed         Boolean          @default(false) @map("rag_indexed")
-  ringUsed           Boolean          @default(false) @map("ring_used")
   needsClarification Boolean          @default(false) @map("needs_clarification")
   sectionsCount      Int              @default(0) @map("sections_count")
   projectId          String           @map("project_id")
@@ -160,10 +176,10 @@ model Message {
   role             MessageRole
   content          String
   summary          String?
-  backendImpacts   String[]    @map("backend_impacts")
-  frontendImpacts  String[]    @map("frontend_impacts")
+  operationalImpacts String[]  @map("operational_impacts")
+  clientImpacts    String[]    @map("client_impacts")
   documentsUsed    String[]    @map("documents_used")
-  apisUsed         String[]    @map("apis_used")
+  processesUsed    String[]    @map("processes_used")
   openQuestions    String[]    @map("open_questions")
   risks            String[]
   suggestedActions String[]    @map("suggested_actions")
@@ -176,68 +192,21 @@ model Message {
   @@map("messages")
 }
 
-model ApiEndpoint {
-  id                String     @id @default(cuid())
-  method            HttpMethod
-  route             String
-  service           String
-  description       String
-  authRequired      Boolean    @default(true) @map("auth_required")
-  requestPayload    Json?      @map("request_payload")
-  responsePayload   Json?      @map("response_payload")
-  errors            Json?
-  businessTags      String[]   @map("business_tags")
-  relatedComponents String[]   @map("related_components")
-  relatedDocuments  String[]   @map("related_documents")
-  businessRules     String[]   @map("business_rules")
-  projectId         String     @map("project_id")
-  createdAt         DateTime   @default(now()) @map("created_at")
-  updatedAt         DateTime   @updatedAt @map("updated_at")
-
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-
-  @@map("api_endpoints")
-}
-
-model ImpactAnalysis {
-  id                 String   @id @default(cuid())
-  title              String
-  feature            String
-  complexityScore    Int      @default(0) @map("complexity_score")
-  confidenceScore    Int      @default(0) @map("confidence_score")
-  functionalImpact   Json?    @map("functional_impact")
-  backendImpact      Json?    @map("backend_impact")
-  frontendImpact     Json?    @map("frontend_impact")
-  dataImpact         Json?    @map("data_impact")
-  securityImpact     Json?    @map("security_impact")
-  testingImpact      Json?    @map("testing_impact")
-  risks              Json?
-  recommendations    Json?
-  sourceDocs         String[] @map("source_docs")
-  impactedEndpoints  String[] @map("impacted_endpoints")
-  impactedComponents String[] @map("impacted_components")
-  projectId          String   @map("project_id")
-  createdAt          DateTime @default(now()) @map("created_at")
-  updatedAt          DateTime @updatedAt @map("updated_at")
-
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-
-  @@map("impact_analyses")
-}
-
 model Decision {
-  id            String         @id @default(cuid())
+  id            String           @id @default(cuid())
   title         String
   context       String
   justification String
   impact        String
   author        String
-  status        DecisionStatus @default(PENDING)
-  relatedDocs   String[]       @map("related_docs")
-  relatedApis   String[]       @map("related_apis")
-  projectId     String         @map("project_id")
-  createdAt     DateTime       @default(now()) @map("created_at")
-  updatedAt     DateTime       @updatedAt @map("updated_at")
+  status        DecisionStatus   @default(PENDING)
+  inputType     DecisionInputType @default(TEXT) @map("input_type")
+  transcript    String?
+  synthesis     String?
+  relatedDocs   String[]         @map("related_docs")
+  projectId     String           @map("project_id")
+  createdAt     DateTime         @default(now()) @map("created_at")
+  updatedAt     DateTime         @updatedAt @map("updated_at")
 
   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
@@ -263,7 +232,6 @@ model ExplorationQuestion {
   status        QuestionStatus   @default(OPEN)
   source        String?
   relatedDocs   String[]         @map("related_docs")
-  relatedApis   String[]         @map("related_apis")
   explorationId String           @map("exploration_id")
 
   exploration ExplorationPath @relation(fields: [explorationId], references: [id], onDelete: Cascade)

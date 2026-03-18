@@ -23,6 +23,11 @@ export * from './enums';
  */
 export type Project = Prisma.ProjectModel
 /**
+ * Model ProjectIssue
+ * 
+ */
+export type ProjectIssue = Prisma.ProjectIssueModel
+/**
  * Model Document
  * 
  */
@@ -42,16 +47,6 @@ export type Conversation = Prisma.ConversationModel
  * 
  */
 export type Message = Prisma.MessageModel
-/**
- * Model ApiEndpoint
- * 
- */
-export type ApiEndpoint = Prisma.ApiEndpointModel
-/**
- * Model ImpactAnalysis
- * 
- */
-export type ImpactAnalysis = Prisma.ImpactAnalysisModel
 /**
  * Model Decision
  * 

@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   title: "Journal des décisions — Frogia",
-  description: "Historique des décisions d'architecture et de conception",
+  description: "Historique et enregistrement des décisions projet",
 }
 
 export default async function DecisionsPage() {
@@ -22,7 +22,7 @@ export default async function DecisionsPage() {
         <div className="flex flex-col items-center justify-center gap-4 py-20">
           <p className="text-muted-foreground text-lg">Aucun projet actif</p>
           <p className="text-muted-foreground text-sm">
-            Créez un nouveau projet pour accéder au journal des décisions.
+            Créez un projet pour accéder au journal des décisions.
           </p>
         </div>
       )
@@ -33,31 +33,20 @@ export default async function DecisionsPage() {
       orderBy: { createdAt: "desc" },
     })
 
-    const serializedDecisions = decisions.map(
-      (d: {
-        id: string
-        title: string
-        context: string
-        justification: string
-        impact: string
-        author: string
-        status: string
-        relatedDocs: string[]
-        relatedApis: string[]
-        createdAt: Date
-      }) => ({
-        id: d.id,
-        title: d.title,
-        context: d.context,
-        justification: d.justification,
-        impact: d.impact,
-        author: d.author,
-        status: d.status as "APPROVED" | "PENDING" | "REJECTED" | "SUPERSEDED",
-        relatedDocs: d.relatedDocs,
-        relatedApis: d.relatedApis,
-        createdAt: d.createdAt.toISOString(),
-      }),
-    )
+    const serializedDecisions = decisions.map((d) => ({
+      id: d.id,
+      title: d.title,
+      context: d.context,
+      justification: d.justification,
+      impact: d.impact,
+      author: d.author,
+      status: d.status as "APPROVED" | "PENDING" | "REJECTED" | "SUPERSEDED",
+      inputType: d.inputType as "TEXT" | "AUDIO" | "FILE",
+      transcript: d.transcript,
+      synthesis: d.synthesis,
+      relatedDocs: d.relatedDocs,
+      createdAt: d.createdAt.toISOString(),
+    }))
 
     return <DecisionsClient decisions={serializedDecisions} projectName={project.name} />
   } catch (error) {

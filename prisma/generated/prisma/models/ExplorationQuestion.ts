@@ -49,7 +49,6 @@ export type ExplorationQuestionCountAggregateOutputType = {
   status: number
   source: number
   relatedDocs: number
-  relatedApis: number
   explorationId: number
   _all: number
 }
@@ -80,7 +79,6 @@ export type ExplorationQuestionCountAggregateInputType = {
   status?: true
   source?: true
   relatedDocs?: true
-  relatedApis?: true
   explorationId?: true
   _all?: true
 }
@@ -164,7 +162,6 @@ export type ExplorationQuestionGroupByOutputType = {
   status: $Enums.QuestionStatus
   source: string | null
   relatedDocs: string[]
-  relatedApis: string[]
   explorationId: string
   _count: ExplorationQuestionCountAggregateOutputType | null
   _min: ExplorationQuestionMinAggregateOutputType | null
@@ -196,7 +193,6 @@ export type ExplorationQuestionWhereInput = {
   status?: Prisma.EnumQuestionStatusFilter<"ExplorationQuestion"> | $Enums.QuestionStatus
   source?: Prisma.StringNullableFilter<"ExplorationQuestion"> | string | null
   relatedDocs?: Prisma.StringNullableListFilter<"ExplorationQuestion">
-  relatedApis?: Prisma.StringNullableListFilter<"ExplorationQuestion">
   explorationId?: Prisma.StringFilter<"ExplorationQuestion"> | string
   exploration?: Prisma.XOR<Prisma.ExplorationPathScalarRelationFilter, Prisma.ExplorationPathWhereInput>
 }
@@ -208,7 +204,6 @@ export type ExplorationQuestionOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   source?: Prisma.SortOrderInput | Prisma.SortOrder
   relatedDocs?: Prisma.SortOrder
-  relatedApis?: Prisma.SortOrder
   explorationId?: Prisma.SortOrder
   exploration?: Prisma.ExplorationPathOrderByWithRelationInput
 }
@@ -223,7 +218,6 @@ export type ExplorationQuestionWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumQuestionStatusFilter<"ExplorationQuestion"> | $Enums.QuestionStatus
   source?: Prisma.StringNullableFilter<"ExplorationQuestion"> | string | null
   relatedDocs?: Prisma.StringNullableListFilter<"ExplorationQuestion">
-  relatedApis?: Prisma.StringNullableListFilter<"ExplorationQuestion">
   explorationId?: Prisma.StringFilter<"ExplorationQuestion"> | string
   exploration?: Prisma.XOR<Prisma.ExplorationPathScalarRelationFilter, Prisma.ExplorationPathWhereInput>
 }, "id">
@@ -235,7 +229,6 @@ export type ExplorationQuestionOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   source?: Prisma.SortOrderInput | Prisma.SortOrder
   relatedDocs?: Prisma.SortOrder
-  relatedApis?: Prisma.SortOrder
   explorationId?: Prisma.SortOrder
   _count?: Prisma.ExplorationQuestionCountOrderByAggregateInput
   _max?: Prisma.ExplorationQuestionMaxOrderByAggregateInput
@@ -252,7 +245,6 @@ export type ExplorationQuestionScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumQuestionStatusWithAggregatesFilter<"ExplorationQuestion"> | $Enums.QuestionStatus
   source?: Prisma.StringNullableWithAggregatesFilter<"ExplorationQuestion"> | string | null
   relatedDocs?: Prisma.StringNullableListFilter<"ExplorationQuestion">
-  relatedApis?: Prisma.StringNullableListFilter<"ExplorationQuestion">
   explorationId?: Prisma.StringWithAggregatesFilter<"ExplorationQuestion"> | string
 }
 
@@ -263,7 +255,6 @@ export type ExplorationQuestionCreateInput = {
   status?: $Enums.QuestionStatus
   source?: string | null
   relatedDocs?: Prisma.ExplorationQuestionCreaterelatedDocsInput | string[]
-  relatedApis?: Prisma.ExplorationQuestionCreaterelatedApisInput | string[]
   exploration: Prisma.ExplorationPathCreateNestedOneWithoutQuestionsInput
 }
 
@@ -274,7 +265,6 @@ export type ExplorationQuestionUncheckedCreateInput = {
   status?: $Enums.QuestionStatus
   source?: string | null
   relatedDocs?: Prisma.ExplorationQuestionCreaterelatedDocsInput | string[]
-  relatedApis?: Prisma.ExplorationQuestionCreaterelatedApisInput | string[]
   explorationId: string
 }
 
@@ -285,7 +275,6 @@ export type ExplorationQuestionUpdateInput = {
   status?: Prisma.EnumQuestionStatusFieldUpdateOperationsInput | $Enums.QuestionStatus
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.ExplorationQuestionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.ExplorationQuestionUpdaterelatedApisInput | string[]
   exploration?: Prisma.ExplorationPathUpdateOneRequiredWithoutQuestionsNestedInput
 }
 
@@ -296,7 +285,6 @@ export type ExplorationQuestionUncheckedUpdateInput = {
   status?: Prisma.EnumQuestionStatusFieldUpdateOperationsInput | $Enums.QuestionStatus
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.ExplorationQuestionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.ExplorationQuestionUpdaterelatedApisInput | string[]
   explorationId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -307,7 +295,6 @@ export type ExplorationQuestionCreateManyInput = {
   status?: $Enums.QuestionStatus
   source?: string | null
   relatedDocs?: Prisma.ExplorationQuestionCreaterelatedDocsInput | string[]
-  relatedApis?: Prisma.ExplorationQuestionCreaterelatedApisInput | string[]
   explorationId: string
 }
 
@@ -318,7 +305,6 @@ export type ExplorationQuestionUpdateManyMutationInput = {
   status?: Prisma.EnumQuestionStatusFieldUpdateOperationsInput | $Enums.QuestionStatus
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.ExplorationQuestionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.ExplorationQuestionUpdaterelatedApisInput | string[]
 }
 
 export type ExplorationQuestionUncheckedUpdateManyInput = {
@@ -328,7 +314,6 @@ export type ExplorationQuestionUncheckedUpdateManyInput = {
   status?: Prisma.EnumQuestionStatusFieldUpdateOperationsInput | $Enums.QuestionStatus
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.ExplorationQuestionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.ExplorationQuestionUpdaterelatedApisInput | string[]
   explorationId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -349,7 +334,6 @@ export type ExplorationQuestionCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   source?: Prisma.SortOrder
   relatedDocs?: Prisma.SortOrder
-  relatedApis?: Prisma.SortOrder
   explorationId?: Prisma.SortOrder
 }
 
@@ -417,10 +401,6 @@ export type ExplorationQuestionCreaterelatedDocsInput = {
   set: string[]
 }
 
-export type ExplorationQuestionCreaterelatedApisInput = {
-  set: string[]
-}
-
 export type EnumQuestionPriorityFieldUpdateOperationsInput = {
   set?: $Enums.QuestionPriority
 }
@@ -434,11 +414,6 @@ export type ExplorationQuestionUpdaterelatedDocsInput = {
   push?: string | string[]
 }
 
-export type ExplorationQuestionUpdaterelatedApisInput = {
-  set?: string[]
-  push?: string | string[]
-}
-
 export type ExplorationQuestionCreateWithoutExplorationInput = {
   id?: string
   question: string
@@ -446,7 +421,6 @@ export type ExplorationQuestionCreateWithoutExplorationInput = {
   status?: $Enums.QuestionStatus
   source?: string | null
   relatedDocs?: Prisma.ExplorationQuestionCreaterelatedDocsInput | string[]
-  relatedApis?: Prisma.ExplorationQuestionCreaterelatedApisInput | string[]
 }
 
 export type ExplorationQuestionUncheckedCreateWithoutExplorationInput = {
@@ -456,7 +430,6 @@ export type ExplorationQuestionUncheckedCreateWithoutExplorationInput = {
   status?: $Enums.QuestionStatus
   source?: string | null
   relatedDocs?: Prisma.ExplorationQuestionCreaterelatedDocsInput | string[]
-  relatedApis?: Prisma.ExplorationQuestionCreaterelatedApisInput | string[]
 }
 
 export type ExplorationQuestionCreateOrConnectWithoutExplorationInput = {
@@ -495,7 +468,6 @@ export type ExplorationQuestionScalarWhereInput = {
   status?: Prisma.EnumQuestionStatusFilter<"ExplorationQuestion"> | $Enums.QuestionStatus
   source?: Prisma.StringNullableFilter<"ExplorationQuestion"> | string | null
   relatedDocs?: Prisma.StringNullableListFilter<"ExplorationQuestion">
-  relatedApis?: Prisma.StringNullableListFilter<"ExplorationQuestion">
   explorationId?: Prisma.StringFilter<"ExplorationQuestion"> | string
 }
 
@@ -506,7 +478,6 @@ export type ExplorationQuestionCreateManyExplorationInput = {
   status?: $Enums.QuestionStatus
   source?: string | null
   relatedDocs?: Prisma.ExplorationQuestionCreaterelatedDocsInput | string[]
-  relatedApis?: Prisma.ExplorationQuestionCreaterelatedApisInput | string[]
 }
 
 export type ExplorationQuestionUpdateWithoutExplorationInput = {
@@ -516,7 +487,6 @@ export type ExplorationQuestionUpdateWithoutExplorationInput = {
   status?: Prisma.EnumQuestionStatusFieldUpdateOperationsInput | $Enums.QuestionStatus
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.ExplorationQuestionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.ExplorationQuestionUpdaterelatedApisInput | string[]
 }
 
 export type ExplorationQuestionUncheckedUpdateWithoutExplorationInput = {
@@ -526,7 +496,6 @@ export type ExplorationQuestionUncheckedUpdateWithoutExplorationInput = {
   status?: Prisma.EnumQuestionStatusFieldUpdateOperationsInput | $Enums.QuestionStatus
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.ExplorationQuestionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.ExplorationQuestionUpdaterelatedApisInput | string[]
 }
 
 export type ExplorationQuestionUncheckedUpdateManyWithoutExplorationInput = {
@@ -536,7 +505,6 @@ export type ExplorationQuestionUncheckedUpdateManyWithoutExplorationInput = {
   status?: Prisma.EnumQuestionStatusFieldUpdateOperationsInput | $Enums.QuestionStatus
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.ExplorationQuestionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.ExplorationQuestionUpdaterelatedApisInput | string[]
 }
 
 
@@ -548,7 +516,6 @@ export type ExplorationQuestionSelect<ExtArgs extends runtime.Types.Extensions.I
   status?: boolean
   source?: boolean
   relatedDocs?: boolean
-  relatedApis?: boolean
   explorationId?: boolean
   exploration?: boolean | Prisma.ExplorationPathDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["explorationQuestion"]>
@@ -560,7 +527,6 @@ export type ExplorationQuestionSelectCreateManyAndReturn<ExtArgs extends runtime
   status?: boolean
   source?: boolean
   relatedDocs?: boolean
-  relatedApis?: boolean
   explorationId?: boolean
   exploration?: boolean | Prisma.ExplorationPathDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["explorationQuestion"]>
@@ -572,7 +538,6 @@ export type ExplorationQuestionSelectUpdateManyAndReturn<ExtArgs extends runtime
   status?: boolean
   source?: boolean
   relatedDocs?: boolean
-  relatedApis?: boolean
   explorationId?: boolean
   exploration?: boolean | Prisma.ExplorationPathDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["explorationQuestion"]>
@@ -584,11 +549,10 @@ export type ExplorationQuestionSelectScalar = {
   status?: boolean
   source?: boolean
   relatedDocs?: boolean
-  relatedApis?: boolean
   explorationId?: boolean
 }
 
-export type ExplorationQuestionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "question" | "priority" | "status" | "source" | "relatedDocs" | "relatedApis" | "explorationId", ExtArgs["result"]["explorationQuestion"]>
+export type ExplorationQuestionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "question" | "priority" | "status" | "source" | "relatedDocs" | "explorationId", ExtArgs["result"]["explorationQuestion"]>
 export type ExplorationQuestionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   exploration?: boolean | Prisma.ExplorationPathDefaultArgs<ExtArgs>
 }
@@ -611,7 +575,6 @@ export type $ExplorationQuestionPayload<ExtArgs extends runtime.Types.Extensions
     status: $Enums.QuestionStatus
     source: string | null
     relatedDocs: string[]
-    relatedApis: string[]
     explorationId: string
   }, ExtArgs["result"]["explorationQuestion"]>
   composites: {}
@@ -1043,7 +1006,6 @@ export interface ExplorationQuestionFieldRefs {
   readonly status: Prisma.FieldRef<"ExplorationQuestion", 'QuestionStatus'>
   readonly source: Prisma.FieldRef<"ExplorationQuestion", 'String'>
   readonly relatedDocs: Prisma.FieldRef<"ExplorationQuestion", 'String[]'>
-  readonly relatedApis: Prisma.FieldRef<"ExplorationQuestion", 'String[]'>
   readonly explorationId: Prisma.FieldRef<"ExplorationQuestion", 'String'>
 }
     

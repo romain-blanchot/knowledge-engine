@@ -38,10 +38,10 @@ interface SerializedMessage {
   role: "USER" | "ASSISTANT"
   content: string
   summary: string | null
-  backendImpacts: string[]
-  frontendImpacts: string[]
+  operationalImpacts: string[]
+  clientImpacts: string[]
   documentsUsed: string[]
-  apisUsed: string[]
+  processesUsed: string[]
   openQuestions: string[]
   risks: string[]
   suggestedActions: string[]
@@ -74,13 +74,13 @@ const MOCK_RESPONSES: Omit<SerializedMessage, "id" | "conversationId" | "created
     content: "Analyse des impacts de la carte cadeau entreprise sur l'architecture existante.",
     summary:
       "La fonctionnalite carte cadeau entreprise necessite des modifications significatives sur 3 services backend, 2 modules frontend et impacte directement les flux de paiement existants. Le CDC mentionne une integration avec le systeme de fidelite qui n'est pas documentee dans le SFD.",
-    backendImpacts: [
+    operationalImpacts: [
       "Service Paiement : ajout d'un nouveau type de transaction GIFT_CARD avec gestion du solde partiel",
       "Service Commande : prise en charge du split de paiement carte cadeau + CB",
       "Service Notification : nouveaux templates email pour l'envoi et l'activation de la carte",
       "Base de donnees : nouvelle table gift_cards avec relations vers users et transactions",
     ],
-    frontendImpacts: [
+    clientImpacts: [
       "Module Checkout : integration du champ de saisie code carte cadeau avec validation temps reel",
       "Espace Client : page de gestion des cartes cadeaux (solde, historique, transfert)",
       "Back-office : interface d'emission et de suivi des cartes cadeaux entreprise",
@@ -90,7 +90,7 @@ const MOCK_RESPONSES: Omit<SerializedMessage, "id" | "conversationId" | "created
       "SFD-Paiements-v2.1.docx",
       "Architecture-Microservices.md",
     ],
-    apisUsed: [
+    processesUsed: [
       "POST /api/v2/gift-cards/create",
       "GET /api/v2/gift-cards/{id}/balance",
       "POST /api/v2/payments/process",
@@ -116,12 +116,12 @@ const MOCK_RESPONSES: Omit<SerializedMessage, "id" | "conversationId" | "created
     content: "Analyse de coherence entre le CDC et le SFD sur le module de paiement.",
     summary:
       "L'analyse croisee revele 4 divergences entre le Cahier des Charges et les Specifications Fonctionnelles Detaillees sur le module de paiement. Deux divergences sont critiques et necessitent une clarification avant le demarrage du developpement.",
-    backendImpacts: [
+    operationalImpacts: [
       "Le SFD prevoit un webhook Stripe pour la confirmation, le CDC mentionne un polling — impact sur l'architecture asynchrone",
       "Divergence sur le retry policy : CDC = 3 tentatives, SFD = 5 tentatives avec backoff exponentiel",
       "Le SFD inclut un service de reconciliation absent du CDC",
     ],
-    frontendImpacts: [
+    clientImpacts: [
       "Le CDC prevoit une page de confirmation synchrone, le SFD une page avec polling de statut",
       "Gestion du timeout cote client : 30s dans le CDC vs 60s dans le SFD",
     ],
@@ -131,7 +131,7 @@ const MOCK_RESPONSES: Omit<SerializedMessage, "id" | "conversationId" | "created
       "SFD-Webhooks-v1.pdf",
       "Matrice-Exigences-Paiement.xlsx",
     ],
-    apisUsed: [
+    processesUsed: [
       "POST /api/v2/payments/process",
       "GET /api/v2/payments/{id}/status",
       "POST /api/v2/webhooks/stripe",
@@ -158,13 +158,13 @@ const MOCK_RESPONSES: Omit<SerializedMessage, "id" | "conversationId" | "created
     content: "Inventaire des APIs necessaires pour le module de reservation entreprise.",
     summary:
       "Le module de reservation entreprise necessite 12 endpoints repartis sur 4 services. 7 endpoints existent deja et 5 doivent etre crees. L'integration avec le service de disponibilite en temps reel est le point d'attention principal.",
-    backendImpacts: [
+    operationalImpacts: [
       "Service Reservation : 3 nouveaux endpoints (create, update, cancel) avec gestion des quotas entreprise",
       "Service Disponibilite : adaptation de l'endpoint existant pour supporter les creneaux bloques entreprise",
       "Service Facturation : nouveau endpoint pour la facturation groupee mensuelle",
       "Service Auth : extension du middleware pour les tokens entreprise avec scopes specifiques",
     ],
-    frontendImpacts: [
+    clientImpacts: [
       "Portail Entreprise : interface complete de reservation avec calendrier et gestion des collaborateurs",
       "Dashboard Admin : vue consolidee des reservations entreprise avec export CSV",
     ],
@@ -173,7 +173,7 @@ const MOCK_RESPONSES: Omit<SerializedMessage, "id" | "conversationId" | "created
       "API-Catalogue-v3.yaml",
       "Architecture-Auth-v1.md",
     ],
-    apisUsed: [
+    processesUsed: [
       "POST /api/v2/bookings/enterprise/create",
       "GET /api/v2/availability/slots",
       "PUT /api/v2/bookings/{id}",
@@ -200,11 +200,11 @@ const MOCK_RESPONSES: Omit<SerializedMessage, "id" | "conversationId" | "created
     content: "Points a clarifier avant le demarrage du developpement du sprint 4.",
     summary:
       "L'analyse pre-sprint identifie 8 points de clarification repartis en 3 categories : fonctionnels (4), techniques (2) et organisationnels (2). Trois points sont bloquants pour le demarrage.",
-    backendImpacts: [
+    operationalImpacts: [
       "Strategie de migration de la base de donnees non definie pour les nouvelles tables",
       "Choix du broker de messages pour la communication inter-services en attente",
     ],
-    frontendImpacts: [
+    clientImpacts: [
       "Design system non finalise pour les composants de reservation",
       "Strategie de cache client non definie pour les donnees de disponibilite",
     ],
@@ -214,7 +214,7 @@ const MOCK_RESPONSES: Omit<SerializedMessage, "id" | "conversationId" | "created
       "SFD-Paiements-v2.1.docx",
       "ADR-003-MessageBroker.md",
     ],
-    apisUsed: ["GET /api/v2/availability/slots", "POST /api/v2/bookings/enterprise/create"],
+    processesUsed: ["GET /api/v2/availability/slots", "POST /api/v2/bookings/enterprise/create"],
     openQuestions: [
       "Le PO doit valider le perimetre exact du MVP reservation entreprise",
       "L'equipe infra doit confirmer la disponibilite de l'environnement de staging",
@@ -395,19 +395,19 @@ function AssistantMessage({
             </motion.div>
           )}
 
-          {/* Backend Impacts */}
-          {show("backendImpacts") && message.backendImpacts.length > 0 && (
+          {/* Operational Impacts */}
+          {show("operationalImpacts") && message.operationalImpacts.length > 0 && (
             <motion.div className="p-5" {...sectionMotion}>
-              <SectionHeader icon={Cog} label="Impacts Backend" />
-              <SectionList items={message.backendImpacts} />
+              <SectionHeader icon={Cog} label="Implications operationnelles" />
+              <SectionList items={message.operationalImpacts} />
             </motion.div>
           )}
 
-          {/* Frontend Impacts */}
-          {show("frontendImpacts") && message.frontendImpacts.length > 0 && (
+          {/* Client Impacts */}
+          {show("clientImpacts") && message.clientImpacts.length > 0 && (
             <motion.div className="p-5" {...sectionMotion}>
-              <SectionHeader icon={Monitor} label="Impacts Frontend" />
-              <SectionList items={message.frontendImpacts} />
+              <SectionHeader icon={Monitor} label="Impacts experience client" />
+              <SectionList items={message.clientImpacts} />
             </motion.div>
           )}
 
@@ -428,14 +428,14 @@ function AssistantMessage({
                     </ul>
                   </div>
                 )}
-                {message.apisUsed.length > 0 && (
+                {message.processesUsed.length > 0 && (
                   <div>
-                    <SectionHeader icon={Globe} label="APIs concernees" />
+                    <SectionHeader icon={Globe} label="Processus concernes" />
                     <ul className="space-y-1.5">
-                      {message.apisUsed.map((api, i) => (
+                      {message.processesUsed.map((process, i) => (
                         <li key={i} className="flex items-center gap-2 text-sm">
                           <Globe className="text-muted-foreground/60 size-3 flex-shrink-0" />
-                          <span className="font-mono text-xs">{api}</span>
+                          <span className="font-mono text-xs">{process}</span>
                         </li>
                       ))}
                     </ul>
@@ -765,10 +765,10 @@ export function ChatClient({ conversations: initialConversations, projectName }:
         role: "ASSISTANT",
         content: mockData.content,
         summary: mockData.summary,
-        backendImpacts: mockData.backendImpacts,
-        frontendImpacts: mockData.frontendImpacts,
+        operationalImpacts: mockData.operationalImpacts,
+        clientImpacts: mockData.clientImpacts,
         documentsUsed: mockData.documentsUsed,
-        apisUsed: mockData.apisUsed,
+        processesUsed: mockData.processesUsed,
         openQuestions: mockData.openQuestions,
         risks: mockData.risks,
         suggestedActions: mockData.suggestedActions,
@@ -827,10 +827,10 @@ export function ChatClient({ conversations: initialConversations, projectName }:
         role: "USER",
         content: text,
         summary: null,
-        backendImpacts: [],
-        frontendImpacts: [],
+        operationalImpacts: [],
+        clientImpacts: [],
         documentsUsed: [],
-        apisUsed: [],
+        processesUsed: [],
         openQuestions: [],
         risks: [],
         suggestedActions: [],

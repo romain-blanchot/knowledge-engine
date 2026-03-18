@@ -32,6 +32,9 @@ export type DecisionMinAggregateOutputType = {
   impact: string | null
   author: string | null
   status: $Enums.DecisionStatus | null
+  inputType: $Enums.DecisionInputType | null
+  transcript: string | null
+  synthesis: string | null
   projectId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -45,6 +48,9 @@ export type DecisionMaxAggregateOutputType = {
   impact: string | null
   author: string | null
   status: $Enums.DecisionStatus | null
+  inputType: $Enums.DecisionInputType | null
+  transcript: string | null
+  synthesis: string | null
   projectId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -58,8 +64,10 @@ export type DecisionCountAggregateOutputType = {
   impact: number
   author: number
   status: number
+  inputType: number
+  transcript: number
+  synthesis: number
   relatedDocs: number
-  relatedApis: number
   projectId: number
   createdAt: number
   updatedAt: number
@@ -75,6 +83,9 @@ export type DecisionMinAggregateInputType = {
   impact?: true
   author?: true
   status?: true
+  inputType?: true
+  transcript?: true
+  synthesis?: true
   projectId?: true
   createdAt?: true
   updatedAt?: true
@@ -88,6 +99,9 @@ export type DecisionMaxAggregateInputType = {
   impact?: true
   author?: true
   status?: true
+  inputType?: true
+  transcript?: true
+  synthesis?: true
   projectId?: true
   createdAt?: true
   updatedAt?: true
@@ -101,8 +115,10 @@ export type DecisionCountAggregateInputType = {
   impact?: true
   author?: true
   status?: true
+  inputType?: true
+  transcript?: true
+  synthesis?: true
   relatedDocs?: true
-  relatedApis?: true
   projectId?: true
   createdAt?: true
   updatedAt?: true
@@ -189,8 +205,10 @@ export type DecisionGroupByOutputType = {
   impact: string
   author: string
   status: $Enums.DecisionStatus
+  inputType: $Enums.DecisionInputType
+  transcript: string | null
+  synthesis: string | null
   relatedDocs: string[]
-  relatedApis: string[]
   projectId: string
   createdAt: Date
   updatedAt: Date
@@ -225,8 +243,10 @@ export type DecisionWhereInput = {
   impact?: Prisma.StringFilter<"Decision"> | string
   author?: Prisma.StringFilter<"Decision"> | string
   status?: Prisma.EnumDecisionStatusFilter<"Decision"> | $Enums.DecisionStatus
+  inputType?: Prisma.EnumDecisionInputTypeFilter<"Decision"> | $Enums.DecisionInputType
+  transcript?: Prisma.StringNullableFilter<"Decision"> | string | null
+  synthesis?: Prisma.StringNullableFilter<"Decision"> | string | null
   relatedDocs?: Prisma.StringNullableListFilter<"Decision">
-  relatedApis?: Prisma.StringNullableListFilter<"Decision">
   projectId?: Prisma.StringFilter<"Decision"> | string
   createdAt?: Prisma.DateTimeFilter<"Decision"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Decision"> | Date | string
@@ -241,8 +261,10 @@ export type DecisionOrderByWithRelationInput = {
   impact?: Prisma.SortOrder
   author?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  inputType?: Prisma.SortOrder
+  transcript?: Prisma.SortOrderInput | Prisma.SortOrder
+  synthesis?: Prisma.SortOrderInput | Prisma.SortOrder
   relatedDocs?: Prisma.SortOrder
-  relatedApis?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -260,8 +282,10 @@ export type DecisionWhereUniqueInput = Prisma.AtLeast<{
   impact?: Prisma.StringFilter<"Decision"> | string
   author?: Prisma.StringFilter<"Decision"> | string
   status?: Prisma.EnumDecisionStatusFilter<"Decision"> | $Enums.DecisionStatus
+  inputType?: Prisma.EnumDecisionInputTypeFilter<"Decision"> | $Enums.DecisionInputType
+  transcript?: Prisma.StringNullableFilter<"Decision"> | string | null
+  synthesis?: Prisma.StringNullableFilter<"Decision"> | string | null
   relatedDocs?: Prisma.StringNullableListFilter<"Decision">
-  relatedApis?: Prisma.StringNullableListFilter<"Decision">
   projectId?: Prisma.StringFilter<"Decision"> | string
   createdAt?: Prisma.DateTimeFilter<"Decision"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Decision"> | Date | string
@@ -276,8 +300,10 @@ export type DecisionOrderByWithAggregationInput = {
   impact?: Prisma.SortOrder
   author?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  inputType?: Prisma.SortOrder
+  transcript?: Prisma.SortOrderInput | Prisma.SortOrder
+  synthesis?: Prisma.SortOrderInput | Prisma.SortOrder
   relatedDocs?: Prisma.SortOrder
-  relatedApis?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -297,8 +323,10 @@ export type DecisionScalarWhereWithAggregatesInput = {
   impact?: Prisma.StringWithAggregatesFilter<"Decision"> | string
   author?: Prisma.StringWithAggregatesFilter<"Decision"> | string
   status?: Prisma.EnumDecisionStatusWithAggregatesFilter<"Decision"> | $Enums.DecisionStatus
+  inputType?: Prisma.EnumDecisionInputTypeWithAggregatesFilter<"Decision"> | $Enums.DecisionInputType
+  transcript?: Prisma.StringNullableWithAggregatesFilter<"Decision"> | string | null
+  synthesis?: Prisma.StringNullableWithAggregatesFilter<"Decision"> | string | null
   relatedDocs?: Prisma.StringNullableListFilter<"Decision">
-  relatedApis?: Prisma.StringNullableListFilter<"Decision">
   projectId?: Prisma.StringWithAggregatesFilter<"Decision"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Decision"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Decision"> | Date | string
@@ -312,8 +340,10 @@ export type DecisionCreateInput = {
   impact: string
   author: string
   status?: $Enums.DecisionStatus
+  inputType?: $Enums.DecisionInputType
+  transcript?: string | null
+  synthesis?: string | null
   relatedDocs?: Prisma.DecisionCreaterelatedDocsInput | string[]
-  relatedApis?: Prisma.DecisionCreaterelatedApisInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutDecisionsInput
@@ -327,8 +357,10 @@ export type DecisionUncheckedCreateInput = {
   impact: string
   author: string
   status?: $Enums.DecisionStatus
+  inputType?: $Enums.DecisionInputType
+  transcript?: string | null
+  synthesis?: string | null
   relatedDocs?: Prisma.DecisionCreaterelatedDocsInput | string[]
-  relatedApis?: Prisma.DecisionCreaterelatedApisInput | string[]
   projectId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -342,8 +374,10 @@ export type DecisionUpdateInput = {
   impact?: Prisma.StringFieldUpdateOperationsInput | string
   author?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
+  inputType?: Prisma.EnumDecisionInputTypeFieldUpdateOperationsInput | $Enums.DecisionInputType
+  transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  synthesis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.DecisionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.DecisionUpdaterelatedApisInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutDecisionsNestedInput
@@ -357,8 +391,10 @@ export type DecisionUncheckedUpdateInput = {
   impact?: Prisma.StringFieldUpdateOperationsInput | string
   author?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
+  inputType?: Prisma.EnumDecisionInputTypeFieldUpdateOperationsInput | $Enums.DecisionInputType
+  transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  synthesis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.DecisionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.DecisionUpdaterelatedApisInput | string[]
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -372,8 +408,10 @@ export type DecisionCreateManyInput = {
   impact: string
   author: string
   status?: $Enums.DecisionStatus
+  inputType?: $Enums.DecisionInputType
+  transcript?: string | null
+  synthesis?: string | null
   relatedDocs?: Prisma.DecisionCreaterelatedDocsInput | string[]
-  relatedApis?: Prisma.DecisionCreaterelatedApisInput | string[]
   projectId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -387,8 +425,10 @@ export type DecisionUpdateManyMutationInput = {
   impact?: Prisma.StringFieldUpdateOperationsInput | string
   author?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
+  inputType?: Prisma.EnumDecisionInputTypeFieldUpdateOperationsInput | $Enums.DecisionInputType
+  transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  synthesis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.DecisionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.DecisionUpdaterelatedApisInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -401,8 +441,10 @@ export type DecisionUncheckedUpdateManyInput = {
   impact?: Prisma.StringFieldUpdateOperationsInput | string
   author?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
+  inputType?: Prisma.EnumDecisionInputTypeFieldUpdateOperationsInput | $Enums.DecisionInputType
+  transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  synthesis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.DecisionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.DecisionUpdaterelatedApisInput | string[]
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -426,8 +468,10 @@ export type DecisionCountOrderByAggregateInput = {
   impact?: Prisma.SortOrder
   author?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  inputType?: Prisma.SortOrder
+  transcript?: Prisma.SortOrder
+  synthesis?: Prisma.SortOrder
   relatedDocs?: Prisma.SortOrder
-  relatedApis?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -441,6 +485,9 @@ export type DecisionMaxOrderByAggregateInput = {
   impact?: Prisma.SortOrder
   author?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  inputType?: Prisma.SortOrder
+  transcript?: Prisma.SortOrder
+  synthesis?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -454,6 +501,9 @@ export type DecisionMinOrderByAggregateInput = {
   impact?: Prisma.SortOrder
   author?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  inputType?: Prisma.SortOrder
+  transcript?: Prisma.SortOrder
+  synthesis?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -505,20 +555,15 @@ export type DecisionCreaterelatedDocsInput = {
   set: string[]
 }
 
-export type DecisionCreaterelatedApisInput = {
-  set: string[]
-}
-
 export type EnumDecisionStatusFieldUpdateOperationsInput = {
   set?: $Enums.DecisionStatus
 }
 
-export type DecisionUpdaterelatedDocsInput = {
-  set?: string[]
-  push?: string | string[]
+export type EnumDecisionInputTypeFieldUpdateOperationsInput = {
+  set?: $Enums.DecisionInputType
 }
 
-export type DecisionUpdaterelatedApisInput = {
+export type DecisionUpdaterelatedDocsInput = {
   set?: string[]
   push?: string | string[]
 }
@@ -531,8 +576,10 @@ export type DecisionCreateWithoutProjectInput = {
   impact: string
   author: string
   status?: $Enums.DecisionStatus
+  inputType?: $Enums.DecisionInputType
+  transcript?: string | null
+  synthesis?: string | null
   relatedDocs?: Prisma.DecisionCreaterelatedDocsInput | string[]
-  relatedApis?: Prisma.DecisionCreaterelatedApisInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -545,8 +592,10 @@ export type DecisionUncheckedCreateWithoutProjectInput = {
   impact: string
   author: string
   status?: $Enums.DecisionStatus
+  inputType?: $Enums.DecisionInputType
+  transcript?: string | null
+  synthesis?: string | null
   relatedDocs?: Prisma.DecisionCreaterelatedDocsInput | string[]
-  relatedApis?: Prisma.DecisionCreaterelatedApisInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -588,8 +637,10 @@ export type DecisionScalarWhereInput = {
   impact?: Prisma.StringFilter<"Decision"> | string
   author?: Prisma.StringFilter<"Decision"> | string
   status?: Prisma.EnumDecisionStatusFilter<"Decision"> | $Enums.DecisionStatus
+  inputType?: Prisma.EnumDecisionInputTypeFilter<"Decision"> | $Enums.DecisionInputType
+  transcript?: Prisma.StringNullableFilter<"Decision"> | string | null
+  synthesis?: Prisma.StringNullableFilter<"Decision"> | string | null
   relatedDocs?: Prisma.StringNullableListFilter<"Decision">
-  relatedApis?: Prisma.StringNullableListFilter<"Decision">
   projectId?: Prisma.StringFilter<"Decision"> | string
   createdAt?: Prisma.DateTimeFilter<"Decision"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Decision"> | Date | string
@@ -603,8 +654,10 @@ export type DecisionCreateManyProjectInput = {
   impact: string
   author: string
   status?: $Enums.DecisionStatus
+  inputType?: $Enums.DecisionInputType
+  transcript?: string | null
+  synthesis?: string | null
   relatedDocs?: Prisma.DecisionCreaterelatedDocsInput | string[]
-  relatedApis?: Prisma.DecisionCreaterelatedApisInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -617,8 +670,10 @@ export type DecisionUpdateWithoutProjectInput = {
   impact?: Prisma.StringFieldUpdateOperationsInput | string
   author?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
+  inputType?: Prisma.EnumDecisionInputTypeFieldUpdateOperationsInput | $Enums.DecisionInputType
+  transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  synthesis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.DecisionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.DecisionUpdaterelatedApisInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -631,8 +686,10 @@ export type DecisionUncheckedUpdateWithoutProjectInput = {
   impact?: Prisma.StringFieldUpdateOperationsInput | string
   author?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
+  inputType?: Prisma.EnumDecisionInputTypeFieldUpdateOperationsInput | $Enums.DecisionInputType
+  transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  synthesis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.DecisionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.DecisionUpdaterelatedApisInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -645,8 +702,10 @@ export type DecisionUncheckedUpdateManyWithoutProjectInput = {
   impact?: Prisma.StringFieldUpdateOperationsInput | string
   author?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumDecisionStatusFieldUpdateOperationsInput | $Enums.DecisionStatus
+  inputType?: Prisma.EnumDecisionInputTypeFieldUpdateOperationsInput | $Enums.DecisionInputType
+  transcript?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  synthesis?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedDocs?: Prisma.DecisionUpdaterelatedDocsInput | string[]
-  relatedApis?: Prisma.DecisionUpdaterelatedApisInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -661,8 +720,10 @@ export type DecisionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   impact?: boolean
   author?: boolean
   status?: boolean
+  inputType?: boolean
+  transcript?: boolean
+  synthesis?: boolean
   relatedDocs?: boolean
-  relatedApis?: boolean
   projectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -677,8 +738,10 @@ export type DecisionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   impact?: boolean
   author?: boolean
   status?: boolean
+  inputType?: boolean
+  transcript?: boolean
+  synthesis?: boolean
   relatedDocs?: boolean
-  relatedApis?: boolean
   projectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -693,8 +756,10 @@ export type DecisionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   impact?: boolean
   author?: boolean
   status?: boolean
+  inputType?: boolean
+  transcript?: boolean
+  synthesis?: boolean
   relatedDocs?: boolean
-  relatedApis?: boolean
   projectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -709,14 +774,16 @@ export type DecisionSelectScalar = {
   impact?: boolean
   author?: boolean
   status?: boolean
+  inputType?: boolean
+  transcript?: boolean
+  synthesis?: boolean
   relatedDocs?: boolean
-  relatedApis?: boolean
   projectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DecisionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "context" | "justification" | "impact" | "author" | "status" | "relatedDocs" | "relatedApis" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["decision"]>
+export type DecisionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "context" | "justification" | "impact" | "author" | "status" | "inputType" | "transcript" | "synthesis" | "relatedDocs" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["decision"]>
 export type DecisionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
 }
@@ -740,8 +807,10 @@ export type $DecisionPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     impact: string
     author: string
     status: $Enums.DecisionStatus
+    inputType: $Enums.DecisionInputType
+    transcript: string | null
+    synthesis: string | null
     relatedDocs: string[]
-    relatedApis: string[]
     projectId: string
     createdAt: Date
     updatedAt: Date
@@ -1176,8 +1245,10 @@ export interface DecisionFieldRefs {
   readonly impact: Prisma.FieldRef<"Decision", 'String'>
   readonly author: Prisma.FieldRef<"Decision", 'String'>
   readonly status: Prisma.FieldRef<"Decision", 'DecisionStatus'>
+  readonly inputType: Prisma.FieldRef<"Decision", 'DecisionInputType'>
+  readonly transcript: Prisma.FieldRef<"Decision", 'String'>
+  readonly synthesis: Prisma.FieldRef<"Decision", 'String'>
   readonly relatedDocs: Prisma.FieldRef<"Decision", 'String[]'>
-  readonly relatedApis: Prisma.FieldRef<"Decision", 'String[]'>
   readonly projectId: Prisma.FieldRef<"Decision", 'String'>
   readonly createdAt: Prisma.FieldRef<"Decision", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Decision", 'DateTime'>

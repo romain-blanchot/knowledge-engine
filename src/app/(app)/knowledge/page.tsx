@@ -43,7 +43,6 @@ export default async function KnowledgePage() {
       author: doc.author,
       tags: doc.tags,
       ragIndexed: doc.ragIndexed,
-      ringUsed: doc.ringUsed,
       needsClarification: doc.needsClarification,
       sectionsCount: doc.sectionsCount,
       sections: doc.sections,

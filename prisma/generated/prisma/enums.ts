@@ -19,15 +19,25 @@ export const ProjectStatus = {
 export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus]
 
 
+export const ProjectPhase = {
+  PREPARATION: 'PREPARATION',
+  CADRAGE: 'CADRAGE',
+  PROPOSITION: 'PROPOSITION',
+  MISSION: 'MISSION'
+} as const
+
+export type ProjectPhase = (typeof ProjectPhase)[keyof typeof ProjectPhase]
+
+
 export const DocumentCategory = {
   BUSINESS_CONTEXT: 'BUSINESS_CONTEXT',
   COMPANY_KNOWLEDGE: 'COMPANY_KNOWLEDGE',
   CAHIER_DES_CHARGES: 'CAHIER_DES_CHARGES',
   SFD: 'SFD',
-  API_DOCUMENTATION: 'API_DOCUMENTATION',
   TECHNICAL_NOTES: 'TECHNICAL_NOTES',
   ARCHITECTURE_DECISIONS: 'ARCHITECTURE_DECISIONS',
-  OPEN_QUESTIONS: 'OPEN_QUESTIONS'
+  OPEN_QUESTIONS: 'OPEN_QUESTIONS',
+  INDUSTRY_ANALYSIS: 'INDUSTRY_ANALYSIS'
 } as const
 
 export type DocumentCategory = (typeof DocumentCategory)[keyof typeof DocumentCategory]
@@ -43,17 +53,6 @@ export const DocumentStatus = {
 export type DocumentStatus = (typeof DocumentStatus)[keyof typeof DocumentStatus]
 
 
-export const HttpMethod = {
-  GET: 'GET',
-  POST: 'POST',
-  PUT: 'PUT',
-  PATCH: 'PATCH',
-  DELETE: 'DELETE'
-} as const
-
-export type HttpMethod = (typeof HttpMethod)[keyof typeof HttpMethod]
-
-
 export const DecisionStatus = {
   APPROVED: 'APPROVED',
   PENDING: 'PENDING',
@@ -62,6 +61,15 @@ export const DecisionStatus = {
 } as const
 
 export type DecisionStatus = (typeof DecisionStatus)[keyof typeof DecisionStatus]
+
+
+export const DecisionInputType = {
+  TEXT: 'TEXT',
+  AUDIO: 'AUDIO',
+  FILE: 'FILE'
+} as const
+
+export type DecisionInputType = (typeof DecisionInputType)[keyof typeof DecisionInputType]
 
 
 export const QuestionPriority = {
@@ -76,9 +84,9 @@ export type QuestionPriority = (typeof QuestionPriority)[keyof typeof QuestionPr
 
 export const QuestionStatus = {
   OPEN: 'OPEN',
-  ANSWERED: 'ANSWERED',
-  IN_PROGRESS: 'IN_PROGRESS',
-  BLOCKED: 'BLOCKED'
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  IN_PROGRESS: 'IN_PROGRESS'
 } as const
 
 export type QuestionStatus = (typeof QuestionStatus)[keyof typeof QuestionStatus]
@@ -93,13 +101,11 @@ export type MessageRole = (typeof MessageRole)[keyof typeof MessageRole]
 
 
 export const ExplorationCategory = {
-  BUSINESS: 'BUSINESS',
-  FUNCTIONAL: 'FUNCTIONAL',
-  BACKEND: 'BACKEND',
-  FRONTEND: 'FRONTEND',
-  DATA: 'DATA',
-  SECURITY: 'SECURITY',
-  TESTING: 'TESTING'
+  CONTEXTE_ENTREPRISE: 'CONTEXTE_ENTREPRISE',
+  ENJEUX_SECTORIELS: 'ENJEUX_SECTORIELS',
+  QUESTIONS_RDV: 'QUESTIONS_RDV',
+  HYPOTHESES: 'HYPOTHESES',
+  PISTES_CADRAGE: 'PISTES_CADRAGE'
 } as const
 
 export type ExplorationCategory = (typeof ExplorationCategory)[keyof typeof ExplorationCategory]

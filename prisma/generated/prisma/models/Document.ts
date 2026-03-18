@@ -43,7 +43,6 @@ export type DocumentMinAggregateOutputType = {
   content: string | null
   author: string | null
   ragIndexed: boolean | null
-  ringUsed: boolean | null
   needsClarification: boolean | null
   sectionsCount: number | null
   projectId: string | null
@@ -60,7 +59,6 @@ export type DocumentMaxAggregateOutputType = {
   content: string | null
   author: string | null
   ragIndexed: boolean | null
-  ringUsed: boolean | null
   needsClarification: boolean | null
   sectionsCount: number | null
   projectId: string | null
@@ -78,7 +76,6 @@ export type DocumentCountAggregateOutputType = {
   author: number
   tags: number
   ragIndexed: number
-  ringUsed: number
   needsClarification: number
   sectionsCount: number
   projectId: number
@@ -105,7 +102,6 @@ export type DocumentMinAggregateInputType = {
   content?: true
   author?: true
   ragIndexed?: true
-  ringUsed?: true
   needsClarification?: true
   sectionsCount?: true
   projectId?: true
@@ -122,7 +118,6 @@ export type DocumentMaxAggregateInputType = {
   content?: true
   author?: true
   ragIndexed?: true
-  ringUsed?: true
   needsClarification?: true
   sectionsCount?: true
   projectId?: true
@@ -140,7 +135,6 @@ export type DocumentCountAggregateInputType = {
   author?: true
   tags?: true
   ragIndexed?: true
-  ringUsed?: true
   needsClarification?: true
   sectionsCount?: true
   projectId?: true
@@ -245,7 +239,6 @@ export type DocumentGroupByOutputType = {
   author: string
   tags: string[]
   ragIndexed: boolean
-  ringUsed: boolean
   needsClarification: boolean
   sectionsCount: number
   projectId: string
@@ -286,7 +279,6 @@ export type DocumentWhereInput = {
   author?: Prisma.StringFilter<"Document"> | string
   tags?: Prisma.StringNullableListFilter<"Document">
   ragIndexed?: Prisma.BoolFilter<"Document"> | boolean
-  ringUsed?: Prisma.BoolFilter<"Document"> | boolean
   needsClarification?: Prisma.BoolFilter<"Document"> | boolean
   sectionsCount?: Prisma.IntFilter<"Document"> | number
   projectId?: Prisma.StringFilter<"Document"> | string
@@ -306,7 +298,6 @@ export type DocumentOrderByWithRelationInput = {
   author?: Prisma.SortOrder
   tags?: Prisma.SortOrder
   ragIndexed?: Prisma.SortOrder
-  ringUsed?: Prisma.SortOrder
   needsClarification?: Prisma.SortOrder
   sectionsCount?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
@@ -329,7 +320,6 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   author?: Prisma.StringFilter<"Document"> | string
   tags?: Prisma.StringNullableListFilter<"Document">
   ragIndexed?: Prisma.BoolFilter<"Document"> | boolean
-  ringUsed?: Prisma.BoolFilter<"Document"> | boolean
   needsClarification?: Prisma.BoolFilter<"Document"> | boolean
   sectionsCount?: Prisma.IntFilter<"Document"> | number
   projectId?: Prisma.StringFilter<"Document"> | string
@@ -349,7 +339,6 @@ export type DocumentOrderByWithAggregationInput = {
   author?: Prisma.SortOrder
   tags?: Prisma.SortOrder
   ragIndexed?: Prisma.SortOrder
-  ringUsed?: Prisma.SortOrder
   needsClarification?: Prisma.SortOrder
   sectionsCount?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
@@ -375,7 +364,6 @@ export type DocumentScalarWhereWithAggregatesInput = {
   author?: Prisma.StringWithAggregatesFilter<"Document"> | string
   tags?: Prisma.StringNullableListFilter<"Document">
   ragIndexed?: Prisma.BoolWithAggregatesFilter<"Document"> | boolean
-  ringUsed?: Prisma.BoolWithAggregatesFilter<"Document"> | boolean
   needsClarification?: Prisma.BoolWithAggregatesFilter<"Document"> | boolean
   sectionsCount?: Prisma.IntWithAggregatesFilter<"Document"> | number
   projectId?: Prisma.StringWithAggregatesFilter<"Document"> | string
@@ -393,7 +381,6 @@ export type DocumentCreateInput = {
   author: string
   tags?: Prisma.DocumentCreatetagsInput | string[]
   ragIndexed?: boolean
-  ringUsed?: boolean
   needsClarification?: boolean
   sectionsCount?: number
   createdAt?: Date | string
@@ -412,7 +399,6 @@ export type DocumentUncheckedCreateInput = {
   author: string
   tags?: Prisma.DocumentCreatetagsInput | string[]
   ragIndexed?: boolean
-  ringUsed?: boolean
   needsClarification?: boolean
   sectionsCount?: number
   projectId: string
@@ -431,7 +417,6 @@ export type DocumentUpdateInput = {
   author?: Prisma.StringFieldUpdateOperationsInput | string
   tags?: Prisma.DocumentUpdatetagsInput | string[]
   ragIndexed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  ringUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   needsClarification?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sectionsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -450,7 +435,6 @@ export type DocumentUncheckedUpdateInput = {
   author?: Prisma.StringFieldUpdateOperationsInput | string
   tags?: Prisma.DocumentUpdatetagsInput | string[]
   ragIndexed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  ringUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   needsClarification?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sectionsCount?: Prisma.IntFieldUpdateOperationsInput | number
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -469,7 +453,6 @@ export type DocumentCreateManyInput = {
   author: string
   tags?: Prisma.DocumentCreatetagsInput | string[]
   ragIndexed?: boolean
-  ringUsed?: boolean
   needsClarification?: boolean
   sectionsCount?: number
   projectId: string
@@ -487,7 +470,6 @@ export type DocumentUpdateManyMutationInput = {
   author?: Prisma.StringFieldUpdateOperationsInput | string
   tags?: Prisma.DocumentUpdatetagsInput | string[]
   ragIndexed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  ringUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   needsClarification?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sectionsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -504,7 +486,6 @@ export type DocumentUncheckedUpdateManyInput = {
   author?: Prisma.StringFieldUpdateOperationsInput | string
   tags?: Prisma.DocumentUpdatetagsInput | string[]
   ragIndexed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  ringUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   needsClarification?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sectionsCount?: Prisma.IntFieldUpdateOperationsInput | number
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -540,7 +521,6 @@ export type DocumentCountOrderByAggregateInput = {
   author?: Prisma.SortOrder
   tags?: Prisma.SortOrder
   ragIndexed?: Prisma.SortOrder
-  ringUsed?: Prisma.SortOrder
   needsClarification?: Prisma.SortOrder
   sectionsCount?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
@@ -561,7 +541,6 @@ export type DocumentMaxOrderByAggregateInput = {
   content?: Prisma.SortOrder
   author?: Prisma.SortOrder
   ragIndexed?: Prisma.SortOrder
-  ringUsed?: Prisma.SortOrder
   needsClarification?: Prisma.SortOrder
   sectionsCount?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
@@ -578,7 +557,6 @@ export type DocumentMinOrderByAggregateInput = {
   content?: Prisma.SortOrder
   author?: Prisma.SortOrder
   ragIndexed?: Prisma.SortOrder
-  ringUsed?: Prisma.SortOrder
   needsClarification?: Prisma.SortOrder
   sectionsCount?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
@@ -649,17 +627,17 @@ export type EnumDocumentStatusFieldUpdateOperationsInput = {
   set?: $Enums.DocumentStatus
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type DocumentUpdatetagsInput = {
   set?: string[]
   push?: string | string[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type DocumentCreateNestedOneWithoutSectionsInput = {
@@ -686,7 +664,6 @@ export type DocumentCreateWithoutProjectInput = {
   author: string
   tags?: Prisma.DocumentCreatetagsInput | string[]
   ragIndexed?: boolean
-  ringUsed?: boolean
   needsClarification?: boolean
   sectionsCount?: number
   createdAt?: Date | string
@@ -704,7 +681,6 @@ export type DocumentUncheckedCreateWithoutProjectInput = {
   author: string
   tags?: Prisma.DocumentCreatetagsInput | string[]
   ragIndexed?: boolean
-  ringUsed?: boolean
   needsClarification?: boolean
   sectionsCount?: number
   createdAt?: Date | string
@@ -751,7 +727,6 @@ export type DocumentScalarWhereInput = {
   author?: Prisma.StringFilter<"Document"> | string
   tags?: Prisma.StringNullableListFilter<"Document">
   ragIndexed?: Prisma.BoolFilter<"Document"> | boolean
-  ringUsed?: Prisma.BoolFilter<"Document"> | boolean
   needsClarification?: Prisma.BoolFilter<"Document"> | boolean
   sectionsCount?: Prisma.IntFilter<"Document"> | number
   projectId?: Prisma.StringFilter<"Document"> | string
@@ -769,7 +744,6 @@ export type DocumentCreateWithoutSectionsInput = {
   author: string
   tags?: Prisma.DocumentCreatetagsInput | string[]
   ragIndexed?: boolean
-  ringUsed?: boolean
   needsClarification?: boolean
   sectionsCount?: number
   createdAt?: Date | string
@@ -787,7 +761,6 @@ export type DocumentUncheckedCreateWithoutSectionsInput = {
   author: string
   tags?: Prisma.DocumentCreatetagsInput | string[]
   ragIndexed?: boolean
-  ringUsed?: boolean
   needsClarification?: boolean
   sectionsCount?: number
   projectId: string
@@ -821,7 +794,6 @@ export type DocumentUpdateWithoutSectionsInput = {
   author?: Prisma.StringFieldUpdateOperationsInput | string
   tags?: Prisma.DocumentUpdatetagsInput | string[]
   ragIndexed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  ringUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   needsClarification?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sectionsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -839,7 +811,6 @@ export type DocumentUncheckedUpdateWithoutSectionsInput = {
   author?: Prisma.StringFieldUpdateOperationsInput | string
   tags?: Prisma.DocumentUpdatetagsInput | string[]
   ragIndexed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  ringUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   needsClarification?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sectionsCount?: Prisma.IntFieldUpdateOperationsInput | number
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -857,7 +828,6 @@ export type DocumentCreateManyProjectInput = {
   author: string
   tags?: Prisma.DocumentCreatetagsInput | string[]
   ragIndexed?: boolean
-  ringUsed?: boolean
   needsClarification?: boolean
   sectionsCount?: number
   createdAt?: Date | string
@@ -874,7 +844,6 @@ export type DocumentUpdateWithoutProjectInput = {
   author?: Prisma.StringFieldUpdateOperationsInput | string
   tags?: Prisma.DocumentUpdatetagsInput | string[]
   ragIndexed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  ringUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   needsClarification?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sectionsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -892,7 +861,6 @@ export type DocumentUncheckedUpdateWithoutProjectInput = {
   author?: Prisma.StringFieldUpdateOperationsInput | string
   tags?: Prisma.DocumentUpdatetagsInput | string[]
   ragIndexed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  ringUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   needsClarification?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sectionsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -910,7 +878,6 @@ export type DocumentUncheckedUpdateManyWithoutProjectInput = {
   author?: Prisma.StringFieldUpdateOperationsInput | string
   tags?: Prisma.DocumentUpdatetagsInput | string[]
   ragIndexed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  ringUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   needsClarification?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sectionsCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -958,7 +925,6 @@ export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   author?: boolean
   tags?: boolean
   ragIndexed?: boolean
-  ringUsed?: boolean
   needsClarification?: boolean
   sectionsCount?: boolean
   projectId?: boolean
@@ -979,7 +945,6 @@ export type DocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   author?: boolean
   tags?: boolean
   ragIndexed?: boolean
-  ringUsed?: boolean
   needsClarification?: boolean
   sectionsCount?: boolean
   projectId?: boolean
@@ -998,7 +963,6 @@ export type DocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   author?: boolean
   tags?: boolean
   ragIndexed?: boolean
-  ringUsed?: boolean
   needsClarification?: boolean
   sectionsCount?: boolean
   projectId?: boolean
@@ -1017,7 +981,6 @@ export type DocumentSelectScalar = {
   author?: boolean
   tags?: boolean
   ragIndexed?: boolean
-  ringUsed?: boolean
   needsClarification?: boolean
   sectionsCount?: boolean
   projectId?: boolean
@@ -1025,7 +988,7 @@ export type DocumentSelectScalar = {
   updatedAt?: boolean
 }
 
-export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "category" | "status" | "summary" | "content" | "author" | "tags" | "ragIndexed" | "ringUsed" | "needsClarification" | "sectionsCount" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
+export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "category" | "status" | "summary" | "content" | "author" | "tags" | "ragIndexed" | "needsClarification" | "sectionsCount" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
 export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
   sections?: boolean | Prisma.Document$sectionsArgs<ExtArgs>
@@ -1054,7 +1017,6 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     author: string
     tags: string[]
     ragIndexed: boolean
-    ringUsed: boolean
     needsClarification: boolean
     sectionsCount: number
     projectId: string
@@ -1494,7 +1456,6 @@ export interface DocumentFieldRefs {
   readonly author: Prisma.FieldRef<"Document", 'String'>
   readonly tags: Prisma.FieldRef<"Document", 'String[]'>
   readonly ragIndexed: Prisma.FieldRef<"Document", 'Boolean'>
-  readonly ringUsed: Prisma.FieldRef<"Document", 'Boolean'>
   readonly needsClarification: Prisma.FieldRef<"Document", 'Boolean'>
   readonly sectionsCount: Prisma.FieldRef<"Document", 'Int'>
   readonly projectId: Prisma.FieldRef<"Document", 'String'>

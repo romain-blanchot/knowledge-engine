@@ -4,11 +4,8 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
   LayoutDashboard,
-  FolderKanban,
   BookOpen,
   MessageSquare,
-  Globe,
-  Zap,
   Compass,
   ScrollText,
   Settings,
@@ -28,17 +25,11 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar"
 
-const mainNavItems = [
-  { title: "Tableau de bord", href: "/dashboard", icon: LayoutDashboard },
-  { title: "Projets", href: "/projects", icon: FolderKanban },
+const navItems = [
+  { title: "Vue projet", href: "/dashboard", icon: LayoutDashboard },
   { title: "Base documentaire", href: "/knowledge", icon: BookOpen },
-  { title: "Assistant Chat", href: "/chat", icon: MessageSquare },
-]
-
-const analysisNavItems = [
-  { title: "Explorateur API", href: "/api-explorer", icon: Globe },
-  { title: "Analyse d'impact", href: "/impact", icon: Zap },
   { title: "Pistes exploratoires", href: "/exploration", icon: Compass },
+  { title: "Assistant Chat", href: "/chat", icon: MessageSquare },
   { title: "Journal des décisions", href: "/decisions", icon: ScrollText },
 ]
 
@@ -63,34 +54,10 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+          <SidebarGroupLabel>Espace projet</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {mainNavItems.map((item) => (
-                <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={pathname === item.href || pathname.startsWith(item.href + "/")}
-                    tooltip={item.title}
-                  >
-                    <Link href={item.href}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarSeparator />
-
-        <SidebarGroup>
-          <SidebarGroupLabel>Analyse</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {analysisNavItems.map((item) => (
+              {navItems.map((item) => (
                 <SidebarMenuItem key={item.href}>
                   <SidebarMenuButton
                     asChild
@@ -115,14 +82,13 @@ export function AppSidebar() {
             <div className="rounded-lg border border-border/50 bg-accent/30 p-3 group-data-[collapsible=icon]:hidden">
               <div className="flex items-center gap-2 text-xs font-medium text-primary">
                 <Sparkles className="size-3.5" />
-                Ring Context
+                Contexte actif
               </div>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Projet actif : Boom Boom Villette
-              </p>
+              <p className="mt-1 text-sm font-medium">Boom Boom Villette</p>
+              <p className="text-[11px] text-muted-foreground">Restauration · Réservation</p>
               <div className="mt-2 flex items-center gap-1.5">
                 <div className="size-1.5 rounded-full bg-success animate-pulse" />
-                <span className="text-xs text-muted-foreground">RAG connecté</span>
+                <span className="text-[11px] text-muted-foreground">Base indexée</span>
               </div>
             </div>
           </SidebarGroupContent>
@@ -150,7 +116,7 @@ export function AppSidebar() {
           </div>
           <div className="flex flex-col group-data-[collapsible=icon]:hidden">
             <span className="text-sm font-medium">Romain L.</span>
-            <span className="text-[11px] text-muted-foreground">Lead Consultant</span>
+            <span className="text-[11px] text-muted-foreground">Consultant Senior</span>
           </div>
         </div>
       </SidebarFooter>

@@ -52,12 +52,11 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Project: 'Project',
+  ProjectIssue: 'ProjectIssue',
   Document: 'Document',
   DocumentSection: 'DocumentSection',
   Conversation: 'Conversation',
   Message: 'Message',
-  ApiEndpoint: 'ApiEndpoint',
-  ImpactAnalysis: 'ImpactAnalysis',
   Decision: 'Decision',
   ExplorationPath: 'ExplorationPath',
   ExplorationQuestion: 'ExplorationQuestion',
@@ -86,15 +85,29 @@ export const ProjectScalarFieldEnum = {
   name: 'name',
   client: 'client',
   description: 'description',
+  summary: 'summary',
   status: 'status',
+  phase: 'phase',
   industry: 'industry',
-  completionScore: 'completionScore',
   lastActivity: 'lastActivity',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const ProjectIssueScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  severity: 'severity',
+  resolved: 'resolved',
+  projectId: 'projectId',
+  createdAt: 'createdAt'
+} as const
+
+export type ProjectIssueScalarFieldEnum = (typeof ProjectIssueScalarFieldEnum)[keyof typeof ProjectIssueScalarFieldEnum]
 
 
 export const DocumentScalarFieldEnum = {
@@ -107,7 +120,6 @@ export const DocumentScalarFieldEnum = {
   author: 'author',
   tags: 'tags',
   ragIndexed: 'ragIndexed',
-  ringUsed: 'ringUsed',
   needsClarification: 'needsClarification',
   sectionsCount: 'sectionsCount',
   projectId: 'projectId',
@@ -146,10 +158,10 @@ export const MessageScalarFieldEnum = {
   role: 'role',
   content: 'content',
   summary: 'summary',
-  backendImpacts: 'backendImpacts',
-  frontendImpacts: 'frontendImpacts',
+  operationalImpacts: 'operationalImpacts',
+  clientImpacts: 'clientImpacts',
   documentsUsed: 'documentsUsed',
-  apisUsed: 'apisUsed',
+  processesUsed: 'processesUsed',
   openQuestions: 'openQuestions',
   risks: 'risks',
   suggestedActions: 'suggestedActions',
@@ -161,53 +173,6 @@ export const MessageScalarFieldEnum = {
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
 
 
-export const ApiEndpointScalarFieldEnum = {
-  id: 'id',
-  method: 'method',
-  route: 'route',
-  service: 'service',
-  description: 'description',
-  authRequired: 'authRequired',
-  requestPayload: 'requestPayload',
-  responsePayload: 'responsePayload',
-  errors: 'errors',
-  businessTags: 'businessTags',
-  relatedComponents: 'relatedComponents',
-  relatedDocuments: 'relatedDocuments',
-  businessRules: 'businessRules',
-  projectId: 'projectId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ApiEndpointScalarFieldEnum = (typeof ApiEndpointScalarFieldEnum)[keyof typeof ApiEndpointScalarFieldEnum]
-
-
-export const ImpactAnalysisScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  feature: 'feature',
-  complexityScore: 'complexityScore',
-  confidenceScore: 'confidenceScore',
-  functionalImpact: 'functionalImpact',
-  backendImpact: 'backendImpact',
-  frontendImpact: 'frontendImpact',
-  dataImpact: 'dataImpact',
-  securityImpact: 'securityImpact',
-  testingImpact: 'testingImpact',
-  risks: 'risks',
-  recommendations: 'recommendations',
-  sourceDocs: 'sourceDocs',
-  impactedEndpoints: 'impactedEndpoints',
-  impactedComponents: 'impactedComponents',
-  projectId: 'projectId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ImpactAnalysisScalarFieldEnum = (typeof ImpactAnalysisScalarFieldEnum)[keyof typeof ImpactAnalysisScalarFieldEnum]
-
-
 export const DecisionScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -216,8 +181,10 @@ export const DecisionScalarFieldEnum = {
   impact: 'impact',
   author: 'author',
   status: 'status',
+  inputType: 'inputType',
+  transcript: 'transcript',
+  synthesis: 'synthesis',
   relatedDocs: 'relatedDocs',
-  relatedApis: 'relatedApis',
   projectId: 'projectId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -243,7 +210,6 @@ export const ExplorationQuestionScalarFieldEnum = {
   status: 'status',
   source: 'source',
   relatedDocs: 'relatedDocs',
-  relatedApis: 'relatedApis',
   explorationId: 'explorationId'
 } as const
 

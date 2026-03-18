@@ -4,8 +4,8 @@ import { useState, useEffect, useCallback } from "react"
 
 const SECTIONS = [
   "summary",
-  "backendImpacts",
-  "frontendImpacts",
+  "operationalImpacts",
+  "clientImpacts",
   "documents",
   "questions",
   "risks",

@@ -59,10 +59,10 @@ export type MessageCountAggregateOutputType = {
   role: number
   content: number
   summary: number
-  backendImpacts: number
-  frontendImpacts: number
+  operationalImpacts: number
+  clientImpacts: number
   documentsUsed: number
-  apisUsed: number
+  processesUsed: number
   openQuestions: number
   risks: number
   suggestedActions: number
@@ -106,10 +106,10 @@ export type MessageCountAggregateInputType = {
   role?: true
   content?: true
   summary?: true
-  backendImpacts?: true
-  frontendImpacts?: true
+  operationalImpacts?: true
+  clientImpacts?: true
   documentsUsed?: true
-  apisUsed?: true
+  processesUsed?: true
   openQuestions?: true
   risks?: true
   suggestedActions?: true
@@ -210,10 +210,10 @@ export type MessageGroupByOutputType = {
   role: $Enums.MessageRole
   content: string
   summary: string | null
-  backendImpacts: string[]
-  frontendImpacts: string[]
+  operationalImpacts: string[]
+  clientImpacts: string[]
   documentsUsed: string[]
-  apisUsed: string[]
+  processesUsed: string[]
   openQuestions: string[]
   risks: string[]
   suggestedActions: string[]
@@ -250,10 +250,10 @@ export type MessageWhereInput = {
   role?: Prisma.EnumMessageRoleFilter<"Message"> | $Enums.MessageRole
   content?: Prisma.StringFilter<"Message"> | string
   summary?: Prisma.StringNullableFilter<"Message"> | string | null
-  backendImpacts?: Prisma.StringNullableListFilter<"Message">
-  frontendImpacts?: Prisma.StringNullableListFilter<"Message">
+  operationalImpacts?: Prisma.StringNullableListFilter<"Message">
+  clientImpacts?: Prisma.StringNullableListFilter<"Message">
   documentsUsed?: Prisma.StringNullableListFilter<"Message">
-  apisUsed?: Prisma.StringNullableListFilter<"Message">
+  processesUsed?: Prisma.StringNullableListFilter<"Message">
   openQuestions?: Prisma.StringNullableListFilter<"Message">
   risks?: Prisma.StringNullableListFilter<"Message">
   suggestedActions?: Prisma.StringNullableListFilter<"Message">
@@ -268,10 +268,10 @@ export type MessageOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   content?: Prisma.SortOrder
   summary?: Prisma.SortOrderInput | Prisma.SortOrder
-  backendImpacts?: Prisma.SortOrder
-  frontendImpacts?: Prisma.SortOrder
+  operationalImpacts?: Prisma.SortOrder
+  clientImpacts?: Prisma.SortOrder
   documentsUsed?: Prisma.SortOrder
-  apisUsed?: Prisma.SortOrder
+  processesUsed?: Prisma.SortOrder
   openQuestions?: Prisma.SortOrder
   risks?: Prisma.SortOrder
   suggestedActions?: Prisma.SortOrder
@@ -289,10 +289,10 @@ export type MessageWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.EnumMessageRoleFilter<"Message"> | $Enums.MessageRole
   content?: Prisma.StringFilter<"Message"> | string
   summary?: Prisma.StringNullableFilter<"Message"> | string | null
-  backendImpacts?: Prisma.StringNullableListFilter<"Message">
-  frontendImpacts?: Prisma.StringNullableListFilter<"Message">
+  operationalImpacts?: Prisma.StringNullableListFilter<"Message">
+  clientImpacts?: Prisma.StringNullableListFilter<"Message">
   documentsUsed?: Prisma.StringNullableListFilter<"Message">
-  apisUsed?: Prisma.StringNullableListFilter<"Message">
+  processesUsed?: Prisma.StringNullableListFilter<"Message">
   openQuestions?: Prisma.StringNullableListFilter<"Message">
   risks?: Prisma.StringNullableListFilter<"Message">
   suggestedActions?: Prisma.StringNullableListFilter<"Message">
@@ -307,10 +307,10 @@ export type MessageOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   content?: Prisma.SortOrder
   summary?: Prisma.SortOrderInput | Prisma.SortOrder
-  backendImpacts?: Prisma.SortOrder
-  frontendImpacts?: Prisma.SortOrder
+  operationalImpacts?: Prisma.SortOrder
+  clientImpacts?: Prisma.SortOrder
   documentsUsed?: Prisma.SortOrder
-  apisUsed?: Prisma.SortOrder
+  processesUsed?: Prisma.SortOrder
   openQuestions?: Prisma.SortOrder
   risks?: Prisma.SortOrder
   suggestedActions?: Prisma.SortOrder
@@ -332,10 +332,10 @@ export type MessageScalarWhereWithAggregatesInput = {
   role?: Prisma.EnumMessageRoleWithAggregatesFilter<"Message"> | $Enums.MessageRole
   content?: Prisma.StringWithAggregatesFilter<"Message"> | string
   summary?: Prisma.StringNullableWithAggregatesFilter<"Message"> | string | null
-  backendImpacts?: Prisma.StringNullableListFilter<"Message">
-  frontendImpacts?: Prisma.StringNullableListFilter<"Message">
+  operationalImpacts?: Prisma.StringNullableListFilter<"Message">
+  clientImpacts?: Prisma.StringNullableListFilter<"Message">
   documentsUsed?: Prisma.StringNullableListFilter<"Message">
-  apisUsed?: Prisma.StringNullableListFilter<"Message">
+  processesUsed?: Prisma.StringNullableListFilter<"Message">
   openQuestions?: Prisma.StringNullableListFilter<"Message">
   risks?: Prisma.StringNullableListFilter<"Message">
   suggestedActions?: Prisma.StringNullableListFilter<"Message">
@@ -349,10 +349,10 @@ export type MessageCreateInput = {
   role: $Enums.MessageRole
   content: string
   summary?: string | null
-  backendImpacts?: Prisma.MessageCreatebackendImpactsInput | string[]
-  frontendImpacts?: Prisma.MessageCreatefrontendImpactsInput | string[]
+  operationalImpacts?: Prisma.MessageCreateoperationalImpactsInput | string[]
+  clientImpacts?: Prisma.MessageCreateclientImpactsInput | string[]
   documentsUsed?: Prisma.MessageCreatedocumentsUsedInput | string[]
-  apisUsed?: Prisma.MessageCreateapisUsedInput | string[]
+  processesUsed?: Prisma.MessageCreateprocessesUsedInput | string[]
   openQuestions?: Prisma.MessageCreateopenQuestionsInput | string[]
   risks?: Prisma.MessageCreaterisksInput | string[]
   suggestedActions?: Prisma.MessageCreatesuggestedActionsInput | string[]
@@ -366,10 +366,10 @@ export type MessageUncheckedCreateInput = {
   role: $Enums.MessageRole
   content: string
   summary?: string | null
-  backendImpacts?: Prisma.MessageCreatebackendImpactsInput | string[]
-  frontendImpacts?: Prisma.MessageCreatefrontendImpactsInput | string[]
+  operationalImpacts?: Prisma.MessageCreateoperationalImpactsInput | string[]
+  clientImpacts?: Prisma.MessageCreateclientImpactsInput | string[]
   documentsUsed?: Prisma.MessageCreatedocumentsUsedInput | string[]
-  apisUsed?: Prisma.MessageCreateapisUsedInput | string[]
+  processesUsed?: Prisma.MessageCreateprocessesUsedInput | string[]
   openQuestions?: Prisma.MessageCreateopenQuestionsInput | string[]
   risks?: Prisma.MessageCreaterisksInput | string[]
   suggestedActions?: Prisma.MessageCreatesuggestedActionsInput | string[]
@@ -383,10 +383,10 @@ export type MessageUpdateInput = {
   role?: Prisma.EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
   content?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  backendImpacts?: Prisma.MessageUpdatebackendImpactsInput | string[]
-  frontendImpacts?: Prisma.MessageUpdatefrontendImpactsInput | string[]
+  operationalImpacts?: Prisma.MessageUpdateoperationalImpactsInput | string[]
+  clientImpacts?: Prisma.MessageUpdateclientImpactsInput | string[]
   documentsUsed?: Prisma.MessageUpdatedocumentsUsedInput | string[]
-  apisUsed?: Prisma.MessageUpdateapisUsedInput | string[]
+  processesUsed?: Prisma.MessageUpdateprocessesUsedInput | string[]
   openQuestions?: Prisma.MessageUpdateopenQuestionsInput | string[]
   risks?: Prisma.MessageUpdaterisksInput | string[]
   suggestedActions?: Prisma.MessageUpdatesuggestedActionsInput | string[]
@@ -400,10 +400,10 @@ export type MessageUncheckedUpdateInput = {
   role?: Prisma.EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
   content?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  backendImpacts?: Prisma.MessageUpdatebackendImpactsInput | string[]
-  frontendImpacts?: Prisma.MessageUpdatefrontendImpactsInput | string[]
+  operationalImpacts?: Prisma.MessageUpdateoperationalImpactsInput | string[]
+  clientImpacts?: Prisma.MessageUpdateclientImpactsInput | string[]
   documentsUsed?: Prisma.MessageUpdatedocumentsUsedInput | string[]
-  apisUsed?: Prisma.MessageUpdateapisUsedInput | string[]
+  processesUsed?: Prisma.MessageUpdateprocessesUsedInput | string[]
   openQuestions?: Prisma.MessageUpdateopenQuestionsInput | string[]
   risks?: Prisma.MessageUpdaterisksInput | string[]
   suggestedActions?: Prisma.MessageUpdatesuggestedActionsInput | string[]
@@ -417,10 +417,10 @@ export type MessageCreateManyInput = {
   role: $Enums.MessageRole
   content: string
   summary?: string | null
-  backendImpacts?: Prisma.MessageCreatebackendImpactsInput | string[]
-  frontendImpacts?: Prisma.MessageCreatefrontendImpactsInput | string[]
+  operationalImpacts?: Prisma.MessageCreateoperationalImpactsInput | string[]
+  clientImpacts?: Prisma.MessageCreateclientImpactsInput | string[]
   documentsUsed?: Prisma.MessageCreatedocumentsUsedInput | string[]
-  apisUsed?: Prisma.MessageCreateapisUsedInput | string[]
+  processesUsed?: Prisma.MessageCreateprocessesUsedInput | string[]
   openQuestions?: Prisma.MessageCreateopenQuestionsInput | string[]
   risks?: Prisma.MessageCreaterisksInput | string[]
   suggestedActions?: Prisma.MessageCreatesuggestedActionsInput | string[]
@@ -434,10 +434,10 @@ export type MessageUpdateManyMutationInput = {
   role?: Prisma.EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
   content?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  backendImpacts?: Prisma.MessageUpdatebackendImpactsInput | string[]
-  frontendImpacts?: Prisma.MessageUpdatefrontendImpactsInput | string[]
+  operationalImpacts?: Prisma.MessageUpdateoperationalImpactsInput | string[]
+  clientImpacts?: Prisma.MessageUpdateclientImpactsInput | string[]
   documentsUsed?: Prisma.MessageUpdatedocumentsUsedInput | string[]
-  apisUsed?: Prisma.MessageUpdateapisUsedInput | string[]
+  processesUsed?: Prisma.MessageUpdateprocessesUsedInput | string[]
   openQuestions?: Prisma.MessageUpdateopenQuestionsInput | string[]
   risks?: Prisma.MessageUpdaterisksInput | string[]
   suggestedActions?: Prisma.MessageUpdatesuggestedActionsInput | string[]
@@ -450,10 +450,10 @@ export type MessageUncheckedUpdateManyInput = {
   role?: Prisma.EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
   content?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  backendImpacts?: Prisma.MessageUpdatebackendImpactsInput | string[]
-  frontendImpacts?: Prisma.MessageUpdatefrontendImpactsInput | string[]
+  operationalImpacts?: Prisma.MessageUpdateoperationalImpactsInput | string[]
+  clientImpacts?: Prisma.MessageUpdateclientImpactsInput | string[]
   documentsUsed?: Prisma.MessageUpdatedocumentsUsedInput | string[]
-  apisUsed?: Prisma.MessageUpdateapisUsedInput | string[]
+  processesUsed?: Prisma.MessageUpdateprocessesUsedInput | string[]
   openQuestions?: Prisma.MessageUpdateopenQuestionsInput | string[]
   risks?: Prisma.MessageUpdaterisksInput | string[]
   suggestedActions?: Prisma.MessageUpdatesuggestedActionsInput | string[]
@@ -477,10 +477,10 @@ export type MessageCountOrderByAggregateInput = {
   role?: Prisma.SortOrder
   content?: Prisma.SortOrder
   summary?: Prisma.SortOrder
-  backendImpacts?: Prisma.SortOrder
-  frontendImpacts?: Prisma.SortOrder
+  operationalImpacts?: Prisma.SortOrder
+  clientImpacts?: Prisma.SortOrder
   documentsUsed?: Prisma.SortOrder
-  apisUsed?: Prisma.SortOrder
+  processesUsed?: Prisma.SortOrder
   openQuestions?: Prisma.SortOrder
   risks?: Prisma.SortOrder
   suggestedActions?: Prisma.SortOrder
@@ -559,11 +559,11 @@ export type MessageUncheckedUpdateManyWithoutConversationNestedInput = {
   deleteMany?: Prisma.MessageScalarWhereInput | Prisma.MessageScalarWhereInput[]
 }
 
-export type MessageCreatebackendImpactsInput = {
+export type MessageCreateoperationalImpactsInput = {
   set: string[]
 }
 
-export type MessageCreatefrontendImpactsInput = {
+export type MessageCreateclientImpactsInput = {
   set: string[]
 }
 
@@ -571,7 +571,7 @@ export type MessageCreatedocumentsUsedInput = {
   set: string[]
 }
 
-export type MessageCreateapisUsedInput = {
+export type MessageCreateprocessesUsedInput = {
   set: string[]
 }
 
@@ -591,12 +591,12 @@ export type EnumMessageRoleFieldUpdateOperationsInput = {
   set?: $Enums.MessageRole
 }
 
-export type MessageUpdatebackendImpactsInput = {
+export type MessageUpdateoperationalImpactsInput = {
   set?: string[]
   push?: string | string[]
 }
 
-export type MessageUpdatefrontendImpactsInput = {
+export type MessageUpdateclientImpactsInput = {
   set?: string[]
   push?: string | string[]
 }
@@ -606,7 +606,7 @@ export type MessageUpdatedocumentsUsedInput = {
   push?: string | string[]
 }
 
-export type MessageUpdateapisUsedInput = {
+export type MessageUpdateprocessesUsedInput = {
   set?: string[]
   push?: string | string[]
 }
@@ -639,10 +639,10 @@ export type MessageCreateWithoutConversationInput = {
   role: $Enums.MessageRole
   content: string
   summary?: string | null
-  backendImpacts?: Prisma.MessageCreatebackendImpactsInput | string[]
-  frontendImpacts?: Prisma.MessageCreatefrontendImpactsInput | string[]
+  operationalImpacts?: Prisma.MessageCreateoperationalImpactsInput | string[]
+  clientImpacts?: Prisma.MessageCreateclientImpactsInput | string[]
   documentsUsed?: Prisma.MessageCreatedocumentsUsedInput | string[]
-  apisUsed?: Prisma.MessageCreateapisUsedInput | string[]
+  processesUsed?: Prisma.MessageCreateprocessesUsedInput | string[]
   openQuestions?: Prisma.MessageCreateopenQuestionsInput | string[]
   risks?: Prisma.MessageCreaterisksInput | string[]
   suggestedActions?: Prisma.MessageCreatesuggestedActionsInput | string[]
@@ -655,10 +655,10 @@ export type MessageUncheckedCreateWithoutConversationInput = {
   role: $Enums.MessageRole
   content: string
   summary?: string | null
-  backendImpacts?: Prisma.MessageCreatebackendImpactsInput | string[]
-  frontendImpacts?: Prisma.MessageCreatefrontendImpactsInput | string[]
+  operationalImpacts?: Prisma.MessageCreateoperationalImpactsInput | string[]
+  clientImpacts?: Prisma.MessageCreateclientImpactsInput | string[]
   documentsUsed?: Prisma.MessageCreatedocumentsUsedInput | string[]
-  apisUsed?: Prisma.MessageCreateapisUsedInput | string[]
+  processesUsed?: Prisma.MessageCreateprocessesUsedInput | string[]
   openQuestions?: Prisma.MessageCreateopenQuestionsInput | string[]
   risks?: Prisma.MessageCreaterisksInput | string[]
   suggestedActions?: Prisma.MessageCreatesuggestedActionsInput | string[]
@@ -700,10 +700,10 @@ export type MessageScalarWhereInput = {
   role?: Prisma.EnumMessageRoleFilter<"Message"> | $Enums.MessageRole
   content?: Prisma.StringFilter<"Message"> | string
   summary?: Prisma.StringNullableFilter<"Message"> | string | null
-  backendImpacts?: Prisma.StringNullableListFilter<"Message">
-  frontendImpacts?: Prisma.StringNullableListFilter<"Message">
+  operationalImpacts?: Prisma.StringNullableListFilter<"Message">
+  clientImpacts?: Prisma.StringNullableListFilter<"Message">
   documentsUsed?: Prisma.StringNullableListFilter<"Message">
-  apisUsed?: Prisma.StringNullableListFilter<"Message">
+  processesUsed?: Prisma.StringNullableListFilter<"Message">
   openQuestions?: Prisma.StringNullableListFilter<"Message">
   risks?: Prisma.StringNullableListFilter<"Message">
   suggestedActions?: Prisma.StringNullableListFilter<"Message">
@@ -717,10 +717,10 @@ export type MessageCreateManyConversationInput = {
   role: $Enums.MessageRole
   content: string
   summary?: string | null
-  backendImpacts?: Prisma.MessageCreatebackendImpactsInput | string[]
-  frontendImpacts?: Prisma.MessageCreatefrontendImpactsInput | string[]
+  operationalImpacts?: Prisma.MessageCreateoperationalImpactsInput | string[]
+  clientImpacts?: Prisma.MessageCreateclientImpactsInput | string[]
   documentsUsed?: Prisma.MessageCreatedocumentsUsedInput | string[]
-  apisUsed?: Prisma.MessageCreateapisUsedInput | string[]
+  processesUsed?: Prisma.MessageCreateprocessesUsedInput | string[]
   openQuestions?: Prisma.MessageCreateopenQuestionsInput | string[]
   risks?: Prisma.MessageCreaterisksInput | string[]
   suggestedActions?: Prisma.MessageCreatesuggestedActionsInput | string[]
@@ -733,10 +733,10 @@ export type MessageUpdateWithoutConversationInput = {
   role?: Prisma.EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
   content?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  backendImpacts?: Prisma.MessageUpdatebackendImpactsInput | string[]
-  frontendImpacts?: Prisma.MessageUpdatefrontendImpactsInput | string[]
+  operationalImpacts?: Prisma.MessageUpdateoperationalImpactsInput | string[]
+  clientImpacts?: Prisma.MessageUpdateclientImpactsInput | string[]
   documentsUsed?: Prisma.MessageUpdatedocumentsUsedInput | string[]
-  apisUsed?: Prisma.MessageUpdateapisUsedInput | string[]
+  processesUsed?: Prisma.MessageUpdateprocessesUsedInput | string[]
   openQuestions?: Prisma.MessageUpdateopenQuestionsInput | string[]
   risks?: Prisma.MessageUpdaterisksInput | string[]
   suggestedActions?: Prisma.MessageUpdatesuggestedActionsInput | string[]
@@ -749,10 +749,10 @@ export type MessageUncheckedUpdateWithoutConversationInput = {
   role?: Prisma.EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
   content?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  backendImpacts?: Prisma.MessageUpdatebackendImpactsInput | string[]
-  frontendImpacts?: Prisma.MessageUpdatefrontendImpactsInput | string[]
+  operationalImpacts?: Prisma.MessageUpdateoperationalImpactsInput | string[]
+  clientImpacts?: Prisma.MessageUpdateclientImpactsInput | string[]
   documentsUsed?: Prisma.MessageUpdatedocumentsUsedInput | string[]
-  apisUsed?: Prisma.MessageUpdateapisUsedInput | string[]
+  processesUsed?: Prisma.MessageUpdateprocessesUsedInput | string[]
   openQuestions?: Prisma.MessageUpdateopenQuestionsInput | string[]
   risks?: Prisma.MessageUpdaterisksInput | string[]
   suggestedActions?: Prisma.MessageUpdatesuggestedActionsInput | string[]
@@ -765,10 +765,10 @@ export type MessageUncheckedUpdateManyWithoutConversationInput = {
   role?: Prisma.EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
   content?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  backendImpacts?: Prisma.MessageUpdatebackendImpactsInput | string[]
-  frontendImpacts?: Prisma.MessageUpdatefrontendImpactsInput | string[]
+  operationalImpacts?: Prisma.MessageUpdateoperationalImpactsInput | string[]
+  clientImpacts?: Prisma.MessageUpdateclientImpactsInput | string[]
   documentsUsed?: Prisma.MessageUpdatedocumentsUsedInput | string[]
-  apisUsed?: Prisma.MessageUpdateapisUsedInput | string[]
+  processesUsed?: Prisma.MessageUpdateprocessesUsedInput | string[]
   openQuestions?: Prisma.MessageUpdateopenQuestionsInput | string[]
   risks?: Prisma.MessageUpdaterisksInput | string[]
   suggestedActions?: Prisma.MessageUpdatesuggestedActionsInput | string[]
@@ -783,10 +783,10 @@ export type MessageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   role?: boolean
   content?: boolean
   summary?: boolean
-  backendImpacts?: boolean
-  frontendImpacts?: boolean
+  operationalImpacts?: boolean
+  clientImpacts?: boolean
   documentsUsed?: boolean
-  apisUsed?: boolean
+  processesUsed?: boolean
   openQuestions?: boolean
   risks?: boolean
   suggestedActions?: boolean
@@ -801,10 +801,10 @@ export type MessageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   role?: boolean
   content?: boolean
   summary?: boolean
-  backendImpacts?: boolean
-  frontendImpacts?: boolean
+  operationalImpacts?: boolean
+  clientImpacts?: boolean
   documentsUsed?: boolean
-  apisUsed?: boolean
+  processesUsed?: boolean
   openQuestions?: boolean
   risks?: boolean
   suggestedActions?: boolean
@@ -819,10 +819,10 @@ export type MessageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   role?: boolean
   content?: boolean
   summary?: boolean
-  backendImpacts?: boolean
-  frontendImpacts?: boolean
+  operationalImpacts?: boolean
+  clientImpacts?: boolean
   documentsUsed?: boolean
-  apisUsed?: boolean
+  processesUsed?: boolean
   openQuestions?: boolean
   risks?: boolean
   suggestedActions?: boolean
@@ -837,10 +837,10 @@ export type MessageSelectScalar = {
   role?: boolean
   content?: boolean
   summary?: boolean
-  backendImpacts?: boolean
-  frontendImpacts?: boolean
+  operationalImpacts?: boolean
+  clientImpacts?: boolean
   documentsUsed?: boolean
-  apisUsed?: boolean
+  processesUsed?: boolean
   openQuestions?: boolean
   risks?: boolean
   suggestedActions?: boolean
@@ -849,7 +849,7 @@ export type MessageSelectScalar = {
   createdAt?: boolean
 }
 
-export type MessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "role" | "content" | "summary" | "backendImpacts" | "frontendImpacts" | "documentsUsed" | "apisUsed" | "openQuestions" | "risks" | "suggestedActions" | "confidenceScore" | "conversationId" | "createdAt", ExtArgs["result"]["message"]>
+export type MessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "role" | "content" | "summary" | "operationalImpacts" | "clientImpacts" | "documentsUsed" | "processesUsed" | "openQuestions" | "risks" | "suggestedActions" | "confidenceScore" | "conversationId" | "createdAt", ExtArgs["result"]["message"]>
 export type MessageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
 }
@@ -870,10 +870,10 @@ export type $MessagePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     role: $Enums.MessageRole
     content: string
     summary: string | null
-    backendImpacts: string[]
-    frontendImpacts: string[]
+    operationalImpacts: string[]
+    clientImpacts: string[]
     documentsUsed: string[]
-    apisUsed: string[]
+    processesUsed: string[]
     openQuestions: string[]
     risks: string[]
     suggestedActions: string[]
@@ -1308,10 +1308,10 @@ export interface MessageFieldRefs {
   readonly role: Prisma.FieldRef<"Message", 'MessageRole'>
   readonly content: Prisma.FieldRef<"Message", 'String'>
   readonly summary: Prisma.FieldRef<"Message", 'String'>
-  readonly backendImpacts: Prisma.FieldRef<"Message", 'String[]'>
-  readonly frontendImpacts: Prisma.FieldRef<"Message", 'String[]'>
+  readonly operationalImpacts: Prisma.FieldRef<"Message", 'String[]'>
+  readonly clientImpacts: Prisma.FieldRef<"Message", 'String[]'>
   readonly documentsUsed: Prisma.FieldRef<"Message", 'String[]'>
-  readonly apisUsed: Prisma.FieldRef<"Message", 'String[]'>
+  readonly processesUsed: Prisma.FieldRef<"Message", 'String[]'>
   readonly openQuestions: Prisma.FieldRef<"Message", 'String[]'>
   readonly risks: Prisma.FieldRef<"Message", 'String[]'>
   readonly suggestedActions: Prisma.FieldRef<"Message", 'String[]'>

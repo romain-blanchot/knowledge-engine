@@ -20,18 +20,8 @@ export type ProjectModel = runtime.Types.Result.DefaultSelection<Prisma.$Project
 
 export type AggregateProject = {
   _count: ProjectCountAggregateOutputType | null
-  _avg: ProjectAvgAggregateOutputType | null
-  _sum: ProjectSumAggregateOutputType | null
   _min: ProjectMinAggregateOutputType | null
   _max: ProjectMaxAggregateOutputType | null
-}
-
-export type ProjectAvgAggregateOutputType = {
-  completionScore: number | null
-}
-
-export type ProjectSumAggregateOutputType = {
-  completionScore: number | null
 }
 
 export type ProjectMinAggregateOutputType = {
@@ -39,9 +29,10 @@ export type ProjectMinAggregateOutputType = {
   name: string | null
   client: string | null
   description: string | null
+  summary: string | null
   status: $Enums.ProjectStatus | null
+  phase: $Enums.ProjectPhase | null
   industry: string | null
-  completionScore: number | null
   lastActivity: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -52,9 +43,10 @@ export type ProjectMaxAggregateOutputType = {
   name: string | null
   client: string | null
   description: string | null
+  summary: string | null
   status: $Enums.ProjectStatus | null
+  phase: $Enums.ProjectPhase | null
   industry: string | null
-  completionScore: number | null
   lastActivity: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -65,9 +57,10 @@ export type ProjectCountAggregateOutputType = {
   name: number
   client: number
   description: number
+  summary: number
   status: number
+  phase: number
   industry: number
-  completionScore: number
   lastActivity: number
   createdAt: number
   updatedAt: number
@@ -75,22 +68,15 @@ export type ProjectCountAggregateOutputType = {
 }
 
 
-export type ProjectAvgAggregateInputType = {
-  completionScore?: true
-}
-
-export type ProjectSumAggregateInputType = {
-  completionScore?: true
-}
-
 export type ProjectMinAggregateInputType = {
   id?: true
   name?: true
   client?: true
   description?: true
+  summary?: true
   status?: true
+  phase?: true
   industry?: true
-  completionScore?: true
   lastActivity?: true
   createdAt?: true
   updatedAt?: true
@@ -101,9 +87,10 @@ export type ProjectMaxAggregateInputType = {
   name?: true
   client?: true
   description?: true
+  summary?: true
   status?: true
+  phase?: true
   industry?: true
-  completionScore?: true
   lastActivity?: true
   createdAt?: true
   updatedAt?: true
@@ -114,9 +101,10 @@ export type ProjectCountAggregateInputType = {
   name?: true
   client?: true
   description?: true
+  summary?: true
   status?: true
+  phase?: true
   industry?: true
-  completionScore?: true
   lastActivity?: true
   createdAt?: true
   updatedAt?: true
@@ -161,18 +149,6 @@ export type ProjectAggregateArgs<ExtArgs extends runtime.Types.Extensions.Intern
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: ProjectAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: ProjectSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: ProjectMinAggregateInputType
@@ -203,8 +179,6 @@ export type ProjectGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   _count?: ProjectCountAggregateInputType | true
-  _avg?: ProjectAvgAggregateInputType
-  _sum?: ProjectSumAggregateInputType
   _min?: ProjectMinAggregateInputType
   _max?: ProjectMaxAggregateInputType
 }
@@ -214,15 +188,14 @@ export type ProjectGroupByOutputType = {
   name: string
   client: string
   description: string
+  summary: string | null
   status: $Enums.ProjectStatus
+  phase: $Enums.ProjectPhase
   industry: string
-  completionScore: number
   lastActivity: Date
   createdAt: Date
   updatedAt: Date
   _count: ProjectCountAggregateOutputType | null
-  _avg: ProjectAvgAggregateOutputType | null
-  _sum: ProjectSumAggregateOutputType | null
   _min: ProjectMinAggregateOutputType | null
   _max: ProjectMaxAggregateOutputType | null
 }
@@ -250,19 +223,19 @@ export type ProjectWhereInput = {
   name?: Prisma.StringFilter<"Project"> | string
   client?: Prisma.StringFilter<"Project"> | string
   description?: Prisma.StringFilter<"Project"> | string
+  summary?: Prisma.StringNullableFilter<"Project"> | string | null
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFilter<"Project"> | $Enums.ProjectPhase
   industry?: Prisma.StringFilter<"Project"> | string
-  completionScore?: Prisma.IntFilter<"Project"> | number
   lastActivity?: Prisma.DateTimeFilter<"Project"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   documents?: Prisma.DocumentListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
-  apiEndpoints?: Prisma.ApiEndpointListRelationFilter
-  analyses?: Prisma.ImpactAnalysisListRelationFilter
   decisions?: Prisma.DecisionListRelationFilter
   explorations?: Prisma.ExplorationPathListRelationFilter
   activities?: Prisma.ActivityListRelationFilter
+  issues?: Prisma.ProjectIssueListRelationFilter
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -270,19 +243,19 @@ export type ProjectOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   client?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  summary?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  phase?: Prisma.SortOrder
   industry?: Prisma.SortOrder
-  completionScore?: Prisma.SortOrder
   lastActivity?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   documents?: Prisma.DocumentOrderByRelationAggregateInput
   conversations?: Prisma.ConversationOrderByRelationAggregateInput
-  apiEndpoints?: Prisma.ApiEndpointOrderByRelationAggregateInput
-  analyses?: Prisma.ImpactAnalysisOrderByRelationAggregateInput
   decisions?: Prisma.DecisionOrderByRelationAggregateInput
   explorations?: Prisma.ExplorationPathOrderByRelationAggregateInput
   activities?: Prisma.ActivityOrderByRelationAggregateInput
+  issues?: Prisma.ProjectIssueOrderByRelationAggregateInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -293,19 +266,19 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Project"> | string
   client?: Prisma.StringFilter<"Project"> | string
   description?: Prisma.StringFilter<"Project"> | string
+  summary?: Prisma.StringNullableFilter<"Project"> | string | null
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFilter<"Project"> | $Enums.ProjectPhase
   industry?: Prisma.StringFilter<"Project"> | string
-  completionScore?: Prisma.IntFilter<"Project"> | number
   lastActivity?: Prisma.DateTimeFilter<"Project"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   documents?: Prisma.DocumentListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
-  apiEndpoints?: Prisma.ApiEndpointListRelationFilter
-  analyses?: Prisma.ImpactAnalysisListRelationFilter
   decisions?: Prisma.DecisionListRelationFilter
   explorations?: Prisma.ExplorationPathListRelationFilter
   activities?: Prisma.ActivityListRelationFilter
+  issues?: Prisma.ProjectIssueListRelationFilter
 }, "id">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -313,17 +286,16 @@ export type ProjectOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   client?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  summary?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  phase?: Prisma.SortOrder
   industry?: Prisma.SortOrder
-  completionScore?: Prisma.SortOrder
   lastActivity?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ProjectCountOrderByAggregateInput
-  _avg?: Prisma.ProjectAvgOrderByAggregateInput
   _max?: Prisma.ProjectMaxOrderByAggregateInput
   _min?: Prisma.ProjectMinOrderByAggregateInput
-  _sum?: Prisma.ProjectSumOrderByAggregateInput
 }
 
 export type ProjectScalarWhereWithAggregatesInput = {
@@ -334,9 +306,10 @@ export type ProjectScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Project"> | string
   client?: Prisma.StringWithAggregatesFilter<"Project"> | string
   description?: Prisma.StringWithAggregatesFilter<"Project"> | string
+  summary?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   status?: Prisma.EnumProjectStatusWithAggregatesFilter<"Project"> | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseWithAggregatesFilter<"Project"> | $Enums.ProjectPhase
   industry?: Prisma.StringWithAggregatesFilter<"Project"> | string
-  completionScore?: Prisma.IntWithAggregatesFilter<"Project"> | number
   lastActivity?: Prisma.DateTimeWithAggregatesFilter<"Project"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Project"> | Date | string
@@ -347,19 +320,19 @@ export type ProjectCreateInput = {
   name: string
   client: string
   description: string
+  summary?: string | null
   status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
   industry: string
-  completionScore?: number
   lastActivity?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisCreateNestedManyWithoutProjectInput
   decisions?: Prisma.DecisionCreateNestedManyWithoutProjectInput
   explorations?: Prisma.ExplorationPathCreateNestedManyWithoutProjectInput
   activities?: Prisma.ActivityCreateNestedManyWithoutProjectInput
+  issues?: Prisma.ProjectIssueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -367,19 +340,19 @@ export type ProjectUncheckedCreateInput = {
   name: string
   client: string
   description: string
+  summary?: string | null
   status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
   industry: string
-  completionScore?: number
   lastActivity?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisUncheckedCreateNestedManyWithoutProjectInput
   decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutProjectInput
   explorations?: Prisma.ExplorationPathUncheckedCreateNestedManyWithoutProjectInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutProjectInput
+  issues?: Prisma.ProjectIssueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -387,19 +360,19 @@ export type ProjectUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUpdateManyWithoutProjectNestedInput
   decisions?: Prisma.DecisionUpdateManyWithoutProjectNestedInput
   explorations?: Prisma.ExplorationPathUpdateManyWithoutProjectNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutProjectNestedInput
+  issues?: Prisma.ProjectIssueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -407,19 +380,19 @@ export type ProjectUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUncheckedUpdateManyWithoutProjectNestedInput
   decisions?: Prisma.DecisionUncheckedUpdateManyWithoutProjectNestedInput
   explorations?: Prisma.ExplorationPathUncheckedUpdateManyWithoutProjectNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutProjectNestedInput
+  issues?: Prisma.ProjectIssueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -427,9 +400,10 @@ export type ProjectCreateManyInput = {
   name: string
   client: string
   description: string
+  summary?: string | null
   status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
   industry: string
-  completionScore?: number
   lastActivity?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -440,9 +414,10 @@ export type ProjectUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -453,9 +428,10 @@ export type ProjectUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -466,16 +442,13 @@ export type ProjectCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   client?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  summary?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  phase?: Prisma.SortOrder
   industry?: Prisma.SortOrder
-  completionScore?: Prisma.SortOrder
   lastActivity?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type ProjectAvgOrderByAggregateInput = {
-  completionScore?: Prisma.SortOrder
 }
 
 export type ProjectMaxOrderByAggregateInput = {
@@ -483,9 +456,10 @@ export type ProjectMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   client?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  summary?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  phase?: Prisma.SortOrder
   industry?: Prisma.SortOrder
-  completionScore?: Prisma.SortOrder
   lastActivity?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -496,16 +470,13 @@ export type ProjectMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   client?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  summary?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  phase?: Prisma.SortOrder
   industry?: Prisma.SortOrder
-  completionScore?: Prisma.SortOrder
   lastActivity?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type ProjectSumOrderByAggregateInput = {
-  completionScore?: Prisma.SortOrder
 }
 
 export type ProjectScalarRelationFilter = {
@@ -517,20 +488,34 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type EnumProjectStatusFieldUpdateOperationsInput = {
   set?: $Enums.ProjectStatus
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
+export type EnumProjectPhaseFieldUpdateOperationsInput = {
+  set?: $Enums.ProjectPhase
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type ProjectCreateNestedOneWithoutIssuesInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutIssuesInput, Prisma.ProjectUncheckedCreateWithoutIssuesInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutIssuesInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutIssuesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutIssuesInput, Prisma.ProjectUncheckedCreateWithoutIssuesInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutIssuesInput
+  upsert?: Prisma.ProjectUpsertWithoutIssuesInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutIssuesInput, Prisma.ProjectUpdateWithoutIssuesInput>, Prisma.ProjectUncheckedUpdateWithoutIssuesInput>
 }
 
 export type ProjectCreateNestedOneWithoutDocumentsInput = {
@@ -559,34 +544,6 @@ export type ProjectUpdateOneRequiredWithoutConversationsNestedInput = {
   upsert?: Prisma.ProjectUpsertWithoutConversationsInput
   connect?: Prisma.ProjectWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutConversationsInput, Prisma.ProjectUpdateWithoutConversationsInput>, Prisma.ProjectUncheckedUpdateWithoutConversationsInput>
-}
-
-export type ProjectCreateNestedOneWithoutApiEndpointsInput = {
-  create?: Prisma.XOR<Prisma.ProjectCreateWithoutApiEndpointsInput, Prisma.ProjectUncheckedCreateWithoutApiEndpointsInput>
-  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutApiEndpointsInput
-  connect?: Prisma.ProjectWhereUniqueInput
-}
-
-export type ProjectUpdateOneRequiredWithoutApiEndpointsNestedInput = {
-  create?: Prisma.XOR<Prisma.ProjectCreateWithoutApiEndpointsInput, Prisma.ProjectUncheckedCreateWithoutApiEndpointsInput>
-  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutApiEndpointsInput
-  upsert?: Prisma.ProjectUpsertWithoutApiEndpointsInput
-  connect?: Prisma.ProjectWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutApiEndpointsInput, Prisma.ProjectUpdateWithoutApiEndpointsInput>, Prisma.ProjectUncheckedUpdateWithoutApiEndpointsInput>
-}
-
-export type ProjectCreateNestedOneWithoutAnalysesInput = {
-  create?: Prisma.XOR<Prisma.ProjectCreateWithoutAnalysesInput, Prisma.ProjectUncheckedCreateWithoutAnalysesInput>
-  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutAnalysesInput
-  connect?: Prisma.ProjectWhereUniqueInput
-}
-
-export type ProjectUpdateOneRequiredWithoutAnalysesNestedInput = {
-  create?: Prisma.XOR<Prisma.ProjectCreateWithoutAnalysesInput, Prisma.ProjectUncheckedCreateWithoutAnalysesInput>
-  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutAnalysesInput
-  upsert?: Prisma.ProjectUpsertWithoutAnalysesInput
-  connect?: Prisma.ProjectWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutAnalysesInput, Prisma.ProjectUpdateWithoutAnalysesInput>, Prisma.ProjectUncheckedUpdateWithoutAnalysesInput>
 }
 
 export type ProjectCreateNestedOneWithoutDecisionsInput = {
@@ -631,23 +588,115 @@ export type ProjectUpdateOneRequiredWithoutActivitiesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutActivitiesInput, Prisma.ProjectUpdateWithoutActivitiesInput>, Prisma.ProjectUncheckedUpdateWithoutActivitiesInput>
 }
 
+export type ProjectCreateWithoutIssuesInput = {
+  id?: string
+  name: string
+  client: string
+  description: string
+  summary?: string | null
+  status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
+  industry: string
+  lastActivity?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
+  decisions?: Prisma.DecisionCreateNestedManyWithoutProjectInput
+  explorations?: Prisma.ExplorationPathCreateNestedManyWithoutProjectInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutIssuesInput = {
+  id?: string
+  name: string
+  client: string
+  description: string
+  summary?: string | null
+  status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
+  industry: string
+  lastActivity?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
+  decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutProjectInput
+  explorations?: Prisma.ExplorationPathUncheckedCreateNestedManyWithoutProjectInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutIssuesInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutIssuesInput, Prisma.ProjectUncheckedCreateWithoutIssuesInput>
+}
+
+export type ProjectUpsertWithoutIssuesInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutIssuesInput, Prisma.ProjectUncheckedUpdateWithoutIssuesInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutIssuesInput, Prisma.ProjectUncheckedCreateWithoutIssuesInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutIssuesInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutIssuesInput, Prisma.ProjectUncheckedUpdateWithoutIssuesInput>
+}
+
+export type ProjectUpdateWithoutIssuesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  client?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
+  decisions?: Prisma.DecisionUpdateManyWithoutProjectNestedInput
+  explorations?: Prisma.ExplorationPathUpdateManyWithoutProjectNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutIssuesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  client?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
+  decisions?: Prisma.DecisionUncheckedUpdateManyWithoutProjectNestedInput
+  explorations?: Prisma.ExplorationPathUncheckedUpdateManyWithoutProjectNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutProjectNestedInput
+}
+
 export type ProjectCreateWithoutDocumentsInput = {
   id?: string
   name: string
   client: string
   description: string
+  summary?: string | null
   status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
   industry: string
-  completionScore?: number
   lastActivity?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisCreateNestedManyWithoutProjectInput
   decisions?: Prisma.DecisionCreateNestedManyWithoutProjectInput
   explorations?: Prisma.ExplorationPathCreateNestedManyWithoutProjectInput
   activities?: Prisma.ActivityCreateNestedManyWithoutProjectInput
+  issues?: Prisma.ProjectIssueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutDocumentsInput = {
@@ -655,18 +704,18 @@ export type ProjectUncheckedCreateWithoutDocumentsInput = {
   name: string
   client: string
   description: string
+  summary?: string | null
   status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
   industry: string
-  completionScore?: number
   lastActivity?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisUncheckedCreateNestedManyWithoutProjectInput
   decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutProjectInput
   explorations?: Prisma.ExplorationPathUncheckedCreateNestedManyWithoutProjectInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutProjectInput
+  issues?: Prisma.ProjectIssueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutDocumentsInput = {
@@ -690,18 +739,18 @@ export type ProjectUpdateWithoutDocumentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUpdateManyWithoutProjectNestedInput
   decisions?: Prisma.DecisionUpdateManyWithoutProjectNestedInput
   explorations?: Prisma.ExplorationPathUpdateManyWithoutProjectNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutProjectNestedInput
+  issues?: Prisma.ProjectIssueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutDocumentsInput = {
@@ -709,18 +758,18 @@ export type ProjectUncheckedUpdateWithoutDocumentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUncheckedUpdateManyWithoutProjectNestedInput
   decisions?: Prisma.DecisionUncheckedUpdateManyWithoutProjectNestedInput
   explorations?: Prisma.ExplorationPathUncheckedUpdateManyWithoutProjectNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutProjectNestedInput
+  issues?: Prisma.ProjectIssueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutConversationsInput = {
@@ -728,18 +777,18 @@ export type ProjectCreateWithoutConversationsInput = {
   name: string
   client: string
   description: string
+  summary?: string | null
   status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
   industry: string
-  completionScore?: number
   lastActivity?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisCreateNestedManyWithoutProjectInput
   decisions?: Prisma.DecisionCreateNestedManyWithoutProjectInput
   explorations?: Prisma.ExplorationPathCreateNestedManyWithoutProjectInput
   activities?: Prisma.ActivityCreateNestedManyWithoutProjectInput
+  issues?: Prisma.ProjectIssueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutConversationsInput = {
@@ -747,18 +796,18 @@ export type ProjectUncheckedCreateWithoutConversationsInput = {
   name: string
   client: string
   description: string
+  summary?: string | null
   status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
   industry: string
-  completionScore?: number
   lastActivity?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisUncheckedCreateNestedManyWithoutProjectInput
   decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutProjectInput
   explorations?: Prisma.ExplorationPathUncheckedCreateNestedManyWithoutProjectInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutProjectInput
+  issues?: Prisma.ProjectIssueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutConversationsInput = {
@@ -782,18 +831,18 @@ export type ProjectUpdateWithoutConversationsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUpdateManyWithoutProjectNestedInput
   decisions?: Prisma.DecisionUpdateManyWithoutProjectNestedInput
   explorations?: Prisma.ExplorationPathUpdateManyWithoutProjectNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutProjectNestedInput
+  issues?: Prisma.ProjectIssueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutConversationsInput = {
@@ -801,202 +850,18 @@ export type ProjectUncheckedUpdateWithoutConversationsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUncheckedUpdateManyWithoutProjectNestedInput
   decisions?: Prisma.DecisionUncheckedUpdateManyWithoutProjectNestedInput
   explorations?: Prisma.ExplorationPathUncheckedUpdateManyWithoutProjectNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutProjectNestedInput
-}
-
-export type ProjectCreateWithoutApiEndpointsInput = {
-  id?: string
-  name: string
-  client: string
-  description: string
-  status?: $Enums.ProjectStatus
-  industry: string
-  completionScore?: number
-  lastActivity?: Date | string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
-  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisCreateNestedManyWithoutProjectInput
-  decisions?: Prisma.DecisionCreateNestedManyWithoutProjectInput
-  explorations?: Prisma.ExplorationPathCreateNestedManyWithoutProjectInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutProjectInput
-}
-
-export type ProjectUncheckedCreateWithoutApiEndpointsInput = {
-  id?: string
-  name: string
-  client: string
-  description: string
-  status?: $Enums.ProjectStatus
-  industry: string
-  completionScore?: number
-  lastActivity?: Date | string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
-  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisUncheckedCreateNestedManyWithoutProjectInput
-  decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutProjectInput
-  explorations?: Prisma.ExplorationPathUncheckedCreateNestedManyWithoutProjectInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutProjectInput
-}
-
-export type ProjectCreateOrConnectWithoutApiEndpointsInput = {
-  where: Prisma.ProjectWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProjectCreateWithoutApiEndpointsInput, Prisma.ProjectUncheckedCreateWithoutApiEndpointsInput>
-}
-
-export type ProjectUpsertWithoutApiEndpointsInput = {
-  update: Prisma.XOR<Prisma.ProjectUpdateWithoutApiEndpointsInput, Prisma.ProjectUncheckedUpdateWithoutApiEndpointsInput>
-  create: Prisma.XOR<Prisma.ProjectCreateWithoutApiEndpointsInput, Prisma.ProjectUncheckedCreateWithoutApiEndpointsInput>
-  where?: Prisma.ProjectWhereInput
-}
-
-export type ProjectUpdateToOneWithWhereWithoutApiEndpointsInput = {
-  where?: Prisma.ProjectWhereInput
-  data: Prisma.XOR<Prisma.ProjectUpdateWithoutApiEndpointsInput, Prisma.ProjectUncheckedUpdateWithoutApiEndpointsInput>
-}
-
-export type ProjectUpdateWithoutApiEndpointsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  client?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
-  lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
-  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUpdateManyWithoutProjectNestedInput
-  decisions?: Prisma.DecisionUpdateManyWithoutProjectNestedInput
-  explorations?: Prisma.ExplorationPathUpdateManyWithoutProjectNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutProjectNestedInput
-}
-
-export type ProjectUncheckedUpdateWithoutApiEndpointsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  client?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
-  lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
-  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUncheckedUpdateManyWithoutProjectNestedInput
-  decisions?: Prisma.DecisionUncheckedUpdateManyWithoutProjectNestedInput
-  explorations?: Prisma.ExplorationPathUncheckedUpdateManyWithoutProjectNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutProjectNestedInput
-}
-
-export type ProjectCreateWithoutAnalysesInput = {
-  id?: string
-  name: string
-  client: string
-  description: string
-  status?: $Enums.ProjectStatus
-  industry: string
-  completionScore?: number
-  lastActivity?: Date | string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
-  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointCreateNestedManyWithoutProjectInput
-  decisions?: Prisma.DecisionCreateNestedManyWithoutProjectInput
-  explorations?: Prisma.ExplorationPathCreateNestedManyWithoutProjectInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutProjectInput
-}
-
-export type ProjectUncheckedCreateWithoutAnalysesInput = {
-  id?: string
-  name: string
-  client: string
-  description: string
-  status?: $Enums.ProjectStatus
-  industry: string
-  completionScore?: number
-  lastActivity?: Date | string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
-  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedCreateNestedManyWithoutProjectInput
-  decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutProjectInput
-  explorations?: Prisma.ExplorationPathUncheckedCreateNestedManyWithoutProjectInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutProjectInput
-}
-
-export type ProjectCreateOrConnectWithoutAnalysesInput = {
-  where: Prisma.ProjectWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProjectCreateWithoutAnalysesInput, Prisma.ProjectUncheckedCreateWithoutAnalysesInput>
-}
-
-export type ProjectUpsertWithoutAnalysesInput = {
-  update: Prisma.XOR<Prisma.ProjectUpdateWithoutAnalysesInput, Prisma.ProjectUncheckedUpdateWithoutAnalysesInput>
-  create: Prisma.XOR<Prisma.ProjectCreateWithoutAnalysesInput, Prisma.ProjectUncheckedCreateWithoutAnalysesInput>
-  where?: Prisma.ProjectWhereInput
-}
-
-export type ProjectUpdateToOneWithWhereWithoutAnalysesInput = {
-  where?: Prisma.ProjectWhereInput
-  data: Prisma.XOR<Prisma.ProjectUpdateWithoutAnalysesInput, Prisma.ProjectUncheckedUpdateWithoutAnalysesInput>
-}
-
-export type ProjectUpdateWithoutAnalysesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  client?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
-  lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
-  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUpdateManyWithoutProjectNestedInput
-  decisions?: Prisma.DecisionUpdateManyWithoutProjectNestedInput
-  explorations?: Prisma.ExplorationPathUpdateManyWithoutProjectNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutProjectNestedInput
-}
-
-export type ProjectUncheckedUpdateWithoutAnalysesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  client?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
-  lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
-  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedUpdateManyWithoutProjectNestedInput
-  decisions?: Prisma.DecisionUncheckedUpdateManyWithoutProjectNestedInput
-  explorations?: Prisma.ExplorationPathUncheckedUpdateManyWithoutProjectNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutProjectNestedInput
+  issues?: Prisma.ProjectIssueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutDecisionsInput = {
@@ -1004,18 +869,18 @@ export type ProjectCreateWithoutDecisionsInput = {
   name: string
   client: string
   description: string
+  summary?: string | null
   status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
   industry: string
-  completionScore?: number
   lastActivity?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisCreateNestedManyWithoutProjectInput
   explorations?: Prisma.ExplorationPathCreateNestedManyWithoutProjectInput
   activities?: Prisma.ActivityCreateNestedManyWithoutProjectInput
+  issues?: Prisma.ProjectIssueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutDecisionsInput = {
@@ -1023,18 +888,18 @@ export type ProjectUncheckedCreateWithoutDecisionsInput = {
   name: string
   client: string
   description: string
+  summary?: string | null
   status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
   industry: string
-  completionScore?: number
   lastActivity?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisUncheckedCreateNestedManyWithoutProjectInput
   explorations?: Prisma.ExplorationPathUncheckedCreateNestedManyWithoutProjectInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutProjectInput
+  issues?: Prisma.ProjectIssueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutDecisionsInput = {
@@ -1058,18 +923,18 @@ export type ProjectUpdateWithoutDecisionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUpdateManyWithoutProjectNestedInput
   explorations?: Prisma.ExplorationPathUpdateManyWithoutProjectNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutProjectNestedInput
+  issues?: Prisma.ProjectIssueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutDecisionsInput = {
@@ -1077,18 +942,18 @@ export type ProjectUncheckedUpdateWithoutDecisionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUncheckedUpdateManyWithoutProjectNestedInput
   explorations?: Prisma.ExplorationPathUncheckedUpdateManyWithoutProjectNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutProjectNestedInput
+  issues?: Prisma.ProjectIssueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutExplorationsInput = {
@@ -1096,18 +961,18 @@ export type ProjectCreateWithoutExplorationsInput = {
   name: string
   client: string
   description: string
+  summary?: string | null
   status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
   industry: string
-  completionScore?: number
   lastActivity?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisCreateNestedManyWithoutProjectInput
   decisions?: Prisma.DecisionCreateNestedManyWithoutProjectInput
   activities?: Prisma.ActivityCreateNestedManyWithoutProjectInput
+  issues?: Prisma.ProjectIssueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutExplorationsInput = {
@@ -1115,18 +980,18 @@ export type ProjectUncheckedCreateWithoutExplorationsInput = {
   name: string
   client: string
   description: string
+  summary?: string | null
   status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
   industry: string
-  completionScore?: number
   lastActivity?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisUncheckedCreateNestedManyWithoutProjectInput
   decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutProjectInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutProjectInput
+  issues?: Prisma.ProjectIssueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutExplorationsInput = {
@@ -1150,18 +1015,18 @@ export type ProjectUpdateWithoutExplorationsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUpdateManyWithoutProjectNestedInput
   decisions?: Prisma.DecisionUpdateManyWithoutProjectNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutProjectNestedInput
+  issues?: Prisma.ProjectIssueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutExplorationsInput = {
@@ -1169,18 +1034,18 @@ export type ProjectUncheckedUpdateWithoutExplorationsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUncheckedUpdateManyWithoutProjectNestedInput
   decisions?: Prisma.DecisionUncheckedUpdateManyWithoutProjectNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutProjectNestedInput
+  issues?: Prisma.ProjectIssueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutActivitiesInput = {
@@ -1188,18 +1053,18 @@ export type ProjectCreateWithoutActivitiesInput = {
   name: string
   client: string
   description: string
+  summary?: string | null
   status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
   industry: string
-  completionScore?: number
   lastActivity?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutProjectInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisCreateNestedManyWithoutProjectInput
   decisions?: Prisma.DecisionCreateNestedManyWithoutProjectInput
   explorations?: Prisma.ExplorationPathCreateNestedManyWithoutProjectInput
+  issues?: Prisma.ProjectIssueCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutActivitiesInput = {
@@ -1207,18 +1072,18 @@ export type ProjectUncheckedCreateWithoutActivitiesInput = {
   name: string
   client: string
   description: string
+  summary?: string | null
   status?: $Enums.ProjectStatus
+  phase?: $Enums.ProjectPhase
   industry: string
-  completionScore?: number
   lastActivity?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutProjectInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedCreateNestedManyWithoutProjectInput
-  analyses?: Prisma.ImpactAnalysisUncheckedCreateNestedManyWithoutProjectInput
   decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutProjectInput
   explorations?: Prisma.ExplorationPathUncheckedCreateNestedManyWithoutProjectInput
+  issues?: Prisma.ProjectIssueUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutActivitiesInput = {
@@ -1242,18 +1107,18 @@ export type ProjectUpdateWithoutActivitiesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutProjectNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUpdateManyWithoutProjectNestedInput
   decisions?: Prisma.DecisionUpdateManyWithoutProjectNestedInput
   explorations?: Prisma.ExplorationPathUpdateManyWithoutProjectNestedInput
+  issues?: Prisma.ProjectIssueUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutActivitiesInput = {
@@ -1261,18 +1126,18 @@ export type ProjectUncheckedUpdateWithoutActivitiesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   client?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  phase?: Prisma.EnumProjectPhaseFieldUpdateOperationsInput | $Enums.ProjectPhase
   industry?: Prisma.StringFieldUpdateOperationsInput | string
-  completionScore?: Prisma.IntFieldUpdateOperationsInput | number
   lastActivity?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutProjectNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
-  apiEndpoints?: Prisma.ApiEndpointUncheckedUpdateManyWithoutProjectNestedInput
-  analyses?: Prisma.ImpactAnalysisUncheckedUpdateManyWithoutProjectNestedInput
   decisions?: Prisma.DecisionUncheckedUpdateManyWithoutProjectNestedInput
   explorations?: Prisma.ExplorationPathUncheckedUpdateManyWithoutProjectNestedInput
+  issues?: Prisma.ProjectIssueUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 
@@ -1283,21 +1148,19 @@ export type ProjectUncheckedUpdateWithoutActivitiesInput = {
 export type ProjectCountOutputType = {
   documents: number
   conversations: number
-  apiEndpoints: number
-  analyses: number
   decisions: number
   explorations: number
   activities: number
+  issues: number
 }
 
 export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   documents?: boolean | ProjectCountOutputTypeCountDocumentsArgs
   conversations?: boolean | ProjectCountOutputTypeCountConversationsArgs
-  apiEndpoints?: boolean | ProjectCountOutputTypeCountApiEndpointsArgs
-  analyses?: boolean | ProjectCountOutputTypeCountAnalysesArgs
   decisions?: boolean | ProjectCountOutputTypeCountDecisionsArgs
   explorations?: boolean | ProjectCountOutputTypeCountExplorationsArgs
   activities?: boolean | ProjectCountOutputTypeCountActivitiesArgs
+  issues?: boolean | ProjectCountOutputTypeCountIssuesArgs
 }
 
 /**
@@ -1327,20 +1190,6 @@ export type ProjectCountOutputTypeCountConversationsArgs<ExtArgs extends runtime
 /**
  * ProjectCountOutputType without action
  */
-export type ProjectCountOutputTypeCountApiEndpointsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ApiEndpointWhereInput
-}
-
-/**
- * ProjectCountOutputType without action
- */
-export type ProjectCountOutputTypeCountAnalysesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ImpactAnalysisWhereInput
-}
-
-/**
- * ProjectCountOutputType without action
- */
 export type ProjectCountOutputTypeCountDecisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.DecisionWhereInput
 }
@@ -1359,25 +1208,32 @@ export type ProjectCountOutputTypeCountActivitiesArgs<ExtArgs extends runtime.Ty
   where?: Prisma.ActivityWhereInput
 }
 
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountIssuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectIssueWhereInput
+}
+
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   client?: boolean
   description?: boolean
+  summary?: boolean
   status?: boolean
+  phase?: boolean
   industry?: boolean
-  completionScore?: boolean
   lastActivity?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   documents?: boolean | Prisma.Project$documentsArgs<ExtArgs>
   conversations?: boolean | Prisma.Project$conversationsArgs<ExtArgs>
-  apiEndpoints?: boolean | Prisma.Project$apiEndpointsArgs<ExtArgs>
-  analyses?: boolean | Prisma.Project$analysesArgs<ExtArgs>
   decisions?: boolean | Prisma.Project$decisionsArgs<ExtArgs>
   explorations?: boolean | Prisma.Project$explorationsArgs<ExtArgs>
   activities?: boolean | Prisma.Project$activitiesArgs<ExtArgs>
+  issues?: boolean | Prisma.Project$issuesArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -1386,9 +1242,10 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   client?: boolean
   description?: boolean
+  summary?: boolean
   status?: boolean
+  phase?: boolean
   industry?: boolean
-  completionScore?: boolean
   lastActivity?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1399,9 +1256,10 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   client?: boolean
   description?: boolean
+  summary?: boolean
   status?: boolean
+  phase?: boolean
   industry?: boolean
-  completionScore?: boolean
   lastActivity?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1412,23 +1270,23 @@ export type ProjectSelectScalar = {
   name?: boolean
   client?: boolean
   description?: boolean
+  summary?: boolean
   status?: boolean
+  phase?: boolean
   industry?: boolean
-  completionScore?: boolean
   lastActivity?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "client" | "description" | "status" | "industry" | "completionScore" | "lastActivity" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "client" | "description" | "summary" | "status" | "phase" | "industry" | "lastActivity" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   documents?: boolean | Prisma.Project$documentsArgs<ExtArgs>
   conversations?: boolean | Prisma.Project$conversationsArgs<ExtArgs>
-  apiEndpoints?: boolean | Prisma.Project$apiEndpointsArgs<ExtArgs>
-  analyses?: boolean | Prisma.Project$analysesArgs<ExtArgs>
   decisions?: boolean | Prisma.Project$decisionsArgs<ExtArgs>
   explorations?: boolean | Prisma.Project$explorationsArgs<ExtArgs>
   activities?: boolean | Prisma.Project$activitiesArgs<ExtArgs>
+  issues?: boolean | Prisma.Project$issuesArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1439,20 +1297,20 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     documents: Prisma.$DocumentPayload<ExtArgs>[]
     conversations: Prisma.$ConversationPayload<ExtArgs>[]
-    apiEndpoints: Prisma.$ApiEndpointPayload<ExtArgs>[]
-    analyses: Prisma.$ImpactAnalysisPayload<ExtArgs>[]
     decisions: Prisma.$DecisionPayload<ExtArgs>[]
     explorations: Prisma.$ExplorationPathPayload<ExtArgs>[]
     activities: Prisma.$ActivityPayload<ExtArgs>[]
+    issues: Prisma.$ProjectIssuePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
     client: string
     description: string
+    summary: string | null
     status: $Enums.ProjectStatus
+    phase: $Enums.ProjectPhase
     industry: string
-    completionScore: number
     lastActivity: Date
     createdAt: Date
     updatedAt: Date
@@ -1852,11 +1710,10 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   documents<T extends Prisma.Project$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   conversations<T extends Prisma.Project$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  apiEndpoints<T extends Prisma.Project$apiEndpointsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$apiEndpointsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApiEndpointPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  analyses<T extends Prisma.Project$analysesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$analysesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ImpactAnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   decisions<T extends Prisma.Project$decisionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$decisionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   explorations<T extends Prisma.Project$explorationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$explorationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExplorationPathPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   activities<T extends Prisma.Project$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  issues<T extends Prisma.Project$issuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$issuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectIssuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1890,9 +1747,10 @@ export interface ProjectFieldRefs {
   readonly name: Prisma.FieldRef<"Project", 'String'>
   readonly client: Prisma.FieldRef<"Project", 'String'>
   readonly description: Prisma.FieldRef<"Project", 'String'>
+  readonly summary: Prisma.FieldRef<"Project", 'String'>
   readonly status: Prisma.FieldRef<"Project", 'ProjectStatus'>
+  readonly phase: Prisma.FieldRef<"Project", 'ProjectPhase'>
   readonly industry: Prisma.FieldRef<"Project", 'String'>
-  readonly completionScore: Prisma.FieldRef<"Project", 'Int'>
   readonly lastActivity: Prisma.FieldRef<"Project", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Project", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Project", 'DateTime'>
@@ -2337,54 +2195,6 @@ export type Project$conversationsArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
- * Project.apiEndpoints
- */
-export type Project$apiEndpointsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ApiEndpoint
-   */
-  select?: Prisma.ApiEndpointSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ApiEndpoint
-   */
-  omit?: Prisma.ApiEndpointOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ApiEndpointInclude<ExtArgs> | null
-  where?: Prisma.ApiEndpointWhereInput
-  orderBy?: Prisma.ApiEndpointOrderByWithRelationInput | Prisma.ApiEndpointOrderByWithRelationInput[]
-  cursor?: Prisma.ApiEndpointWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ApiEndpointScalarFieldEnum | Prisma.ApiEndpointScalarFieldEnum[]
-}
-
-/**
- * Project.analyses
- */
-export type Project$analysesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ImpactAnalysis
-   */
-  select?: Prisma.ImpactAnalysisSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ImpactAnalysis
-   */
-  omit?: Prisma.ImpactAnalysisOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ImpactAnalysisInclude<ExtArgs> | null
-  where?: Prisma.ImpactAnalysisWhereInput
-  orderBy?: Prisma.ImpactAnalysisOrderByWithRelationInput | Prisma.ImpactAnalysisOrderByWithRelationInput[]
-  cursor?: Prisma.ImpactAnalysisWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ImpactAnalysisScalarFieldEnum | Prisma.ImpactAnalysisScalarFieldEnum[]
-}
-
-/**
  * Project.decisions
  */
 export type Project$decisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2454,6 +2264,30 @@ export type Project$activitiesArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ActivityScalarFieldEnum | Prisma.ActivityScalarFieldEnum[]
+}
+
+/**
+ * Project.issues
+ */
+export type Project$issuesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectIssue
+   */
+  select?: Prisma.ProjectIssueSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectIssue
+   */
+  omit?: Prisma.ProjectIssueOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectIssueInclude<ExtArgs> | null
+  where?: Prisma.ProjectIssueWhereInput
+  orderBy?: Prisma.ProjectIssueOrderByWithRelationInput | Prisma.ProjectIssueOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectIssueWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectIssueScalarFieldEnum | Prisma.ProjectIssueScalarFieldEnum[]
 }
 
 /**

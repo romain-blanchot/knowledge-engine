@@ -63,7 +63,6 @@ interface SerializedDocument {
   author: string
   tags: string[]
   ragIndexed: boolean
-  ringUsed: boolean
   needsClarification: boolean
   sectionsCount: number
   sections: DocumentSection[]
@@ -423,11 +422,6 @@ export function KnowledgeClient({ documents }: { documents: SerializedDocument[]
                           {doc.ragIndexed && (
                             <Badge className="border-success/30 bg-success/15 text-success border text-xs font-normal">
                               Indexe RAG
-                            </Badge>
-                          )}
-                          {doc.ringUsed && (
-                            <Badge className="border-primary/30 bg-primary/15 text-primary border text-xs font-normal">
-                              Ring Context
                             </Badge>
                           )}
                           {doc.needsClarification && (
